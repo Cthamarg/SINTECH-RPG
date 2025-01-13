@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>236455</title>
+  <style>
+    /* ===== Reset básico ===== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'VT323', monospace;
+      background: #000;
+      color: #cc0000;
+      overflow: hidden; /* Sem rolagem do body */
+    }
+
+    /* ===== Canvas de chuva estilo Matrix ===== */
+    #matrix-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* Fica atrás do terminal */
+      pointer-events: none;
+    }
+
+    /* ===== Scanlines ===== */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2; /* Fica acima da chuva e abaixo do terminal */
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 0, 0, 0.02) 0px,
+        rgba(0, 0, 0, 0.15) 2px,
+        transparent 4px
+      );
+      animation: scrollScanlines 8s linear infinite;
+    }
+    @keyframes scrollScanlines {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+
+    /* ===== Terminal ===== */
+    #terminal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(37, 0, 0, 0.9) 20%, rgba(6, 0, 0, 0.9) 90%);
+      width: 90%;
+      max-width: 800px;
+      max-height: 85%;
+      padding: 20px;
+      border: 2px solid #cc0000;
+      box-shadow: 0 0 20px #cc0000;
+      overflow-y: auto;
+      z-index: 3; /* Acima do canvas e das scanlines */
+      animation: glitch-border 2.5s infinite;
+    }
+
+    /* Animação de borda glitch */
+    @keyframes glitch-border {
+      0%, 70% { box-shadow: 0 0 25px #cc0000; }
+      30% { box-shadow: 0 0 10px #cc0000, 0 0 10px #900 inset; }
+      50% { box-shadow: 0 0 25px #ff0000; }
+    }
+
+    /* Barra de rolagem estilizada */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1a0000;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cc0000;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff4d4d;
+    }
+
+    /* ===== Conteúdo interno do terminal ===== */
+    h1 {
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 10px;
+      color: #ff3b3b;
+      text-shadow: 0 0 6px #cc0000;
+    }
+
+    p {
+      text-align: justify;
+      margin-bottom: 1em;
+      line-height: 1.5;
+    }
+
+    .highlight {
+      color: #ff4d4d;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* ===== Cursor piscante ===== */
+    .blink {
+      animation: blink-animation 1s step-end infinite;
+      text-align: center;
+    }
+    @keyframes blink-animation {
+      0%, 100% { opacity: 1.0; }
+      50% { opacity: 0.0; }
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      #terminal {
+        width: 95%;
+        height: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas com chuva estilo Matrix -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <!-- Scanlines -->
+  <div class="scanlines"></div>
+
+  <!-- Terminal -->
+  <div id="terminal">
+    <h1>236455</h1>
+    <p>
+      UXVhbmRvIHNvbmRlaSBhIGFudGlnYSBhbGRyYXZhIGRlIGZlcnJvLCBmaXF1ZWkgY29tIHVtIHBvdWNvIGRlIG1lZG8
+      uIEFsZ3VtIHRlbW9yIGhhdmlhIHNlIGFjdW11bGFkbyBlbSBtaW0sIHRhbHZleiBwb3IgY2F1c2EgZGEgZXN0cmFuaG
+      V6YSBkYSBtaW5oYSBoZXJhbsOnYSwgYSBmYWx0YSBkZSBtb3ZpbWVudG8gZSBvIHNpbMOqbmNpbyBlc3RyYW5obyBkY
+      SBtYW5ow6MgbmFxdWVsYSB2ZWxoYSBjaWRhZGUgZGUgY29zdHVtZXMgYml6YXJyb3MuIEUgcXVhbmRvIG1pbmhhIGJh
+      dGlkYSBmb2kgcmVzcG9uZGlkYSwgZmlxdWVpIGNvbXBsZXRhbWVudGUgYW1lZHJvbnRhZG8sIHBvcnF1ZSBuw6NvIGh
+      hdmlhIG91dmlkbyBuZW5odW0gcGFzc28gYW50ZXMgZGEgcG9ydGEgYWJyaXIgY29tIHVtIHJhbmdpZG8uIE1hcyBuw6
+      NvIGZpcXVlaSBjb20gbWVkbyBwb3IgbXVpdG8gdGVtcG8sIHBvaXMgbyBob21lbSBpZG9zbyBkZSBwaWphbWEgZSBja
+      GluZWxvcyBuYSBlbnRyYWRhIHRpbmhhIHVtIHJvc3RvIGJyYW5kbyBxdWUgbWUgdHJhbnHDvGlsaXpvdTsgZSBhcGVz
+      YXIgZGUgdGVyIGZlaXRvIHNpbmFpcyBkZSBxdWUgZXJhIHN1cmRvLCBlc2NyZXZldSB1bWEgY3VyaW9zYSBlIGFudGl
+      nYSBzYXVkYcOnw6NvIGNvbSBvIGVzdGlsZXRlIGUgYSB0YWJ1bGV0YSBkZSBjZXJhIHF1ZSBjYXJyZWdhdmEu
+    </p>
+  </div>
+
+  <!-- Cursor piscante -->
+  <p class="blink">_</p>
+
+  <script>
+    /* ===== Chuva estilo Matrix ===== */
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const characters = '0123456789ABCDEF';
+    const fontSize = 16; // Tamanho da fonte
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(0);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = 'rgba(204, 0, 0, 0.7)'; // Vermelho translúcido
+      ctx.font = fontSize + 'px VT323';
+
+      drops.forEach((y, index) => {
+        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+        const x = index * fontSize;
+        ctx.fillText(text, x, y);
+
+        drops[index] = y > canvas.height ? 0 : y + fontSize;
+      });
+
+      requestAnimationFrame(drawMatrix);
+    }
+    drawMatrix();
+  </script>
+</body>
+</html>

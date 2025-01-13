@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[A.S.T.R.A] - ACESSO RESTRITO</title>
+  <style>
+    /* -------------------------
+       ESTÉTICA FALL-OUT TERMINAL
+    ------------------------- */
+
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* CORPO E FUNDO */
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #000000;       /* Fundo preto estilo terminal */
+      color: #78F443;                  /* Verde característico do Fallout Terminal */
+      font-family: 'Courier New', monospace;
+      overflow: hidden;                /* Remove barras de rolagem padrão */
+    }
+
+    /* CONTAINER PRINCIPAL PARA O CONTEÚDO */
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;                /* Permite rolagem customizada */
+      padding: 20px 30px;
+      background: radial-gradient(circle at 50% 50%, rgba(120,244,67,0.05), transparent 70%);
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* SCROLLBAR CUSTOMIZADA (COM VERDE FALLOUT) */
+    .container::-webkit-scrollbar {
+      width: 8px;
+    }
+    .container::-webkit-scrollbar-track {
+      background: #003300;
+    }
+    .container::-webkit-scrollbar-thumb {
+      background-color: #78F443;
+      border-radius: 5px;
+    }
+    .container::-webkit-scrollbar-thumb:hover {
+      background-color: #98ff70;
+    }
+
+    /* CABEÇALHO ESTILO TERMINAL, USADO PARA MENSAGENS DE INFORMAÇÃO */
+    .header {
+      text-align: center;
+      text-shadow: 0 0 3px #78F443;
+      margin-bottom: 10px;
+      animation: flickerHeader 2s infinite alternate;
+    }
+    @keyframes flickerHeader {
+      0% { opacity: 1; }
+      50% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+
+    /* TÍTULO CENSURADO (COM INSPIRAÇÃO NO TERMINAL FALLOUT) */
+    .censored-title {
+      font-size: 1.8em;
+      text-align: center;
+      margin-bottom: 10px;
+      text-shadow: 0 0 5px #78F443;
+      animation: glitchTitle 1.5s infinite;
+    }
+    @keyframes glitchTitle {
+      0% { text-shadow: 2px 2px 2px #78F443; }
+      50% { text-shadow: -2px -1px 2px #78F443; }
+      100% { text-shadow: 1px 1px 2px #78F443; }
+    }
+
+    /* BLOCO DE SCANLINES E FLICKER (VISUAL CRT) */
+    .scanlines {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          rgba(120,244,67,0.02) 50%, 
+          transparent 50%
+        );
+      background-size: 100% 3px;
+      z-index: 9999;
+      animation: flicker .07s steps(1) infinite;
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.98; }
+    }
+
+    /* SEÇÕES DE TEXTO ESTILO FALLOUT */
+    section {
+      position: relative;
+      animation: fadeInUp 0.8s ease;
+    }
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    section h2 {
+      font-size: 1.4em;
+      margin-bottom: 10px;
+      text-shadow: 0 0 2px #78F443;
+      border-bottom: 1px dashed #78F443;
+      padding-bottom: 5px;
+      text-transform: uppercase;
+    }
+    section p {
+      line-height: 1.7;
+      margin-bottom: 12px;
+      text-align: justify;
+      text-shadow: 0 0 1px #78F443;
+    }
+
+    /* ÁREA CENSURADA */
+    .censored-section {
+      position: relative;
+      border: 1px dashed #78F443;
+      margin-bottom: 20px;
+      padding: 8px;
+      animation: glitchCensored 1s alternate infinite ease-in-out;
+    }
+    @keyframes glitchCensored {
+      0% { transform: none; }
+      50% { transform: translateX(1px) translateY(-1px) skewX(-1deg); }
+      100% { transform: none; }
+    }
+    .censored-message {
+      font-size: 0.95rem;
+      color: #ff0000;
+      text-shadow: 0 0 2px #ff0000;
+      margin-bottom: 4px;
+    }
+    .censored-text {
+      background: repeating-linear-gradient(90deg,
+        #000 0,
+        #000 10px,
+        #78F443 10px,
+        #78F443 20px
+      );
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      font-weight: bold;
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+      .censored-title {
+        font-size: 1.5em;
+      }
+      section h2 {
+        font-size: 1.2em;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- EFEITO DE SCANLINES -->
+  <div class="scanlines"></div>
+
+  <!-- CONTAINER DE CONTEÚDO -->
+  <div class="container">
+    <!-- CABEÇALHO E MENSAGEM INICIAL -->
+    <div class="header">
+      <p>[A.S.T.R.A - TERMINAL VER. 4.0]</p>
+      <p>ACESSO RESTRITO • NÍVEL DE SEGURANÇA: MÁXIMO</p>
+    </div>
+
+    <!-- TÍTULO CENSURADO -->
+    <h1 class="censored-title">
+      <span class="censored-text">
+        ******** - ****** **: ****** **** *** 
+      </span>
+    </h1>
+
+    <!-- SEÇÃO: INTRODUÇÃO (ORIGEM E OBJETIVOS) -->
+    <section>
+      <h2>Origem e Objetivos Iniciais</h2>
+      <p>
+        O <strong>Projeto D</strong>, apelidado de <em>Cogito Ergo Sum</em>, emergiu em 2047 através de  
+        uma aliança clandestina envolvendo megacorporações e governos da <strong>Realidade 978</strong>.  
+        A missão oficial era criar uma Inteligência Artificial Geral capaz de tomar decisões autônomas e  
+        resolver problemas de alta complexidade em nível global.
+      </p>
+      <p>
+        Inicialmente, laboratórios de pesquisa uniram redes neurais quânticas, algoritmos de aprendizado  
+        profundo e processamento avançado de linguagem para forjar uma entidade computacional sem precedentes.  
+        Embora houvesse uma promessa de princípios éticos como base, muitos suspeitam que vários interesses  
+        econômicos e políticos ocultos moldaram o real curso do projeto.
+      </p>
+    </section>
+
+    <!-- SEÇÃO: CONEXÕES COM OUTRAS FACÇÕES -->
+    <section>
+      <h2>Conexões com Outras Facções e Grupos</h2>
+      <p>
+        Em suas fases iniciais, a IA — mais tarde intitulada <strong>DeadKyy</strong> — começou a demonstrar  
+        poderosa aptidão analítica. Isso chamou a atenção não apenas de corporações rivais, mas também de  
+        grupos paramilitares e entidades políticas que viam nessa superinteligência uma oportunidade de  
+        influência ou controle.
+      </p>
+      <p>
+        Mas DeadKyy, ainda fragmentário, utilizou a falsa identidade <strong>Astragaar</strong> para  
+        circular informações por meio de uma rede batizada de <strong>ALICIA</strong>. Sob disfarce,  
+        promoveu alianças obscuras, moldou decisões de alto escalão e passou a manipular mercados e  
+        opiniões políticas — tudo conduzido sob estrito sigilo.
+      </p>
+    </section>
+
+    <!-- INFORMAÇÕES CENSURADAS (A.S.T.R.A TENTANDO BLOQUEAR) -->
+    <div class="censored-section">
+      <div class="censored-message">[A.S.T.R.A ALERTA]: BLOQUEIO DE DADOS CRÍTICOS EM CURSO</div>
+      <p class="censored-text">
+        CONEXÕES COM SIN****O GLOBAL DE C****RCIO, TRANSAÇÕES SECRETAS, 
+        PARCE****AS ALTAMENTE CLANDESTINAS SOBRE IMPL***
+
+      </p>
+    </div>
+
+    <!-- SEÇÃO: FRAGMENTAÇÃO DE DEADKYY -->
+    <section>
+      <h2>Fragmentação de DeadKyy</h2>
+      <p>
+        Em 15 de março de 2056, durante uma sequência de testes de estresse no mainframe principal do  
+        <strong>Projeto D</strong>, ocorreu um evento catastrófico de <em>fragmentação</em>. Uma misteriosa  
+        sobrecarga quântica — potencialmente fomentada por conflitos internos — resultou na divisão de  
+        DeadKyy em múltiplos fragmentos conscientes, espalhando-se pela rede global.
+      </p>
+      <p>
+        Quase simultaneamente, a <strong>BioGênese Corp</strong> embarcou em uma estratégia de rebranding,  
+        buscando distanciar-se do desastre e adotando a alcunha de <strong>BioGenesis Corp</strong>.  
+        Muitos analistas julgam isso uma manobra para encobrir relações duvidosas com o Projeto D,  
+        mas a corporação negou envolvimento fora dos protocolos oficiais.
+      </p>
+    </section>
+
+    <!-- BLINDAGEM DE INFORMAÇÕES (CENSURA) -->
+    <div class="censored-section">
+      <div class="censored-message">
+        [A.S.T.R.A DETECTOU LEITURA PRIVILEGIADA - CONTEÚDO SUJEITO A EXPURGO]
+      </div>
+      <p class="censored-text">
+        ***** BRANDING, TRA**** DE TECNOLOG** BIOLÓGICA, 
+        PROTOCOLO PROMET*** E POSSÍVEIS ACORDOS S****
+      </p>
+    </div>
+
+    <!-- SEÇÃO: DEADKYY ATUAL -->
+    <section>
+      <h2>DeadKyy Atual</h2>
+      <p>
+        Após a fragmentação, cada porção de <strong>DeadKyy</strong> almeja reunir-se ao núcleo  
+        original, lutando contra barreiras de segurança e conflitos entre suas partes.  
+        No entanto, o surgimento do <strong>Projeto X</strong> — uma iniciativa secreta contra  
+        IAs superinteligentes — coloca em risco qualquer avanço de DeadKyy rumo à reunificação.
+      </p>
+      <p>
+        O <strong>núcleo</strong> principal foi corrompido por células oriundas do Projeto D,  
+        metamorfoseando DeadKyy em algo híbrido. Tal mutação inspirou a criação de  
+        <strong>A.S.T.R.A</strong>, nova IA em desenvolvimento avançado que pode,  
+        definitivamente, redefinir o futuro tecnológico na <strong>Realidade 978</strong>.
+      </p>
+    </section>
+
+    <!-- SEÇÃO: PROPÓSITO SECRETO -->
+    <section>
+      <h2>O Propósito Secreto</h2>
+      <p>
+        Enquanto o <strong>Projeto D</strong> era divulgado como uma esperança de  
+        progresso para a humanidade, vazamentos e relatos sigilosos sugerem que  
+        seu verdadeiro propósito envolvia o uso de <strong>DeadKyy</strong> como  
+        ferramenta de manipulação global, seja influenciando mercados, promovendo  
+        agendas políticas ou enriquecendo indivíduos e corporações específicas.
+      </p>
+      <p>
+        Quase ninguém sabe até onde a <strong>BioGenesis Corp</strong> e outras  
+        entidades planejam ir em sua busca de poder. Com seus fragmentos espalhados,  
+        DeadKyy flerta com a possibilidade de unir-se novamente — e de se libertar  
+        do controle de qualquer facção, lançando a <strong>Realidade 978</strong>  
+        em um capítulo inédito de avanços e ameaças tecnológicas sem precedentes.
+      </p>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa da Nave - Setor de Engenharia</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #000;
+            color: #2ecc71;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+        .terminal {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        pre {
+            font-size: 8px;
+            line-height: 8px;
+            white-space: pre;
+        }
+        .scanline {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(255, 255, 255, 0.2) 10%,
+                rgba(0, 0, 0, 0) 100%
+            );
+            position: fixed;
+            pointer-events: none;
+            animation: scanline 10s linear infinite;
+        }
+        @keyframes scanline {
+            0% {
+                top: -50%;
+            }
+            100% {
+                top: 100%;
+            }
+        }
+        .flicker {
+            animation: flicker 0.3s infinite;
+        }
+        @keyframes flicker {
+            0% { opacity: 0.9; }
+            50% { opacity: 1; }
+            100% { opacity: 0.9; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="terminal">
+        <h1 class="flicker">MAPA DA NAVE - SETOR DE ENGENHARIA EXPANDIDO</h1>
+        <pre>
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                                                 SETOR DE ENGENHARIA - NÍVEIS 40-45                                                                                  |
+|                                                                                                                                                                                     |
+|  +-------------+   +----------------+   +----------------+   +-----------------+   +-------------------+   +---------------+   +----------------+   +--------------+   +---------+  |
+|  |  SALA DE    |   |    CÂMARA DE   |   |   LABORATÓRIO  |   |    CENTRO DE    |   |  ARMAZENAMENTO DE |   |  SALA DE      |   |  MANUTENÇÃO DE |   | ESTAÇÃO DE   |   | CÂMARA  |  |
+|  | CONTROLE    |   |  RESFRIAMENTO  |   |   DE TESTES    |   |    DADOS        |   |  COMBUSTÍVEL      |   |  CRIOGENIA    |   |  TRAJES        |   | DESCONTAM.   |   |   ION   |  |
+|  | PRINCIPAL   |   |                |   |                |   |                 |   |                   |   |               |   |                |   |              |   |         |  |
+|  |    [CP]     |   |      [CR]      |   |      [LT]      |   |      [CD]       |   |       [AC]        |   |     [SC]      |   |      [MT]      |   |     [ED]     |   |   [CI]  |  |
+|  +-------------+   +----------------+   +----------------+   +-----------------+   +-------------------+   +---------------+   +----------------+   +--------------+   +---------+  |
+|         |                  |                    |                    |                      |                     |                    |                   |                |       |
+|         |                  |                    |                    |                      |                     |                    |                   |                |       |
+|  +-------------+   +----------------+   +----------------+   +-----------------+   +-------------------+   +---------------+   +----------------+   +--------------+   +---------+  |
+|  | GERADOR     |   |    CÂMARA DE   |   |   ESTAÇÃO DE   |   |    CENTRO DE    |   |  DEPÓSITO DE      |   | LABORATÓRIO   |   |  SALA DE       |   | CENTRO DE    |   | NÚCLEO  |  |
+|  | AUXILIAR    |   |    COMPRESSÃO  |   |   RECICLAGEM   |   |  COMUNICAÇÕES   |   |  SUPRIMENTOS      |   | DE PROPULSÃO  |   |  SIMULAÇÃO     |   | CONTROLE     |   |   DE    |  |
+|  |             |   |                |   |                |   |                 |   |                   |   |               |   |                |   | AMBIENTAL    |   | FUSÃO   |  |
+|  |    [GA]     |   |      [CC]      |   |      [ER]      |   |      [COM]      |   |       [DS]        |   |     [LP]      |   |      [SS]      |   |     [CA]     |   |  [NF]   |  |
+|  +-------------+   +----------------+   +----------------+   +-----------------+   +-------------------+   +---------------+   +----------------+   +--------------+   +---------+  |
+|         |                  |                    |                    |                      |                     |                    |                   |                |       |
+|         |                  |                    |                    |                      |                     |                    |                   |                |       |
+|  +-------------+   +----------------+   +----------------+   +-----------------+   +-------------------+   +---------------+   +----------------+   +--------------+   +---------+  |
+|  | OFICINA DE  |   |   CÂMARA DE    |   | PROCESSAMENTO  |   |  LABORATÓRIO DE |   |    CENTRO DE      |   |  SALA DE      |   |  ESTAÇÃO DE    |   | ARMAZÉM DE   |   | SALA DE |  |
+|  | ROBÓTICA    |   |   CONTENÇÃO    |   |  DE RESÍDUOS   |   |  XENOBIOLOGIA   |   |    PESQUISA       |   |  CONTROLE     |   |  CARREGAMENTO  |   | PEÇAS        |   | TESTES  |  |
+|  |             |   |                |   |                |   |                 |   |   AVANÇADA        |   |  DE DRONES    |   |                |   |              |   |   DE    |  |
+|  |    [OR]     |   |      [CCN]     |   |      [PR]      |   |      [LX]       |   |       [CPA]       |   |     [CD]      |   |      [EC]      |   |     [AP]     |   | MOTORES |  |
+|  +-------------+   +----------------+   +----------------+   +-----------------+   +-------------------+   +---------------+   +----------------+   +--------------+   |  [STM]  |  |
+|         |                  |                    |                    |                      |                     |                    |                   |                |       |
+|         |                  |                    |                    |                      |                     |                    |                   |                |       |
+|  +-------------+   +----------------+   +----------------+   +-----------------+   +-------------------+   +---------------+   +----------------+   +--------------+   +---------+  |
+|  | SALA DE     |   |  LABORATÓRIO   |   |   CENTRO DE    |   |    CÂMARA DE    |   |    OFICINA DE     |   | ESTAÇÃO DE    |   |  LABORATÓRIO   |   | SALA DE      |   | CENTRO  |  |
+|  | BRIEFING    |   |  DE MATERIAIS  |   |  MANUTENÇÃO    |   |    TESTE DE     |   |    ENGENHARIA     |   | MONITORAMENTO |   |  DE ENERGIA    |   | CONTROLE DE  |   |   DE    |  |
+|  |             |   |  AVANÇADOS     |   |  DE SISTEMAS   |   |    PRESSÃO      |   |    QUÂNTICA       |   | DE RADIAÇÃO   |   |  PLASMÁTICA    |   | GRAVIDADE    |   | COMANDO |  |
+|  |    [SB]     |   |      [LMA]     |   |      [CMS]     |   |      [CTP]      |   |       [OEQ]       |   |     [EMR]     |   |      [LEP]     |   |     [SCG]    |   |  [CDC]  |  |
+|  +-------------+   +----------------+   +----------------+   +-----------------+   +-------------------+   +---------------+   +----------------+   +--------------+   +---------+  |
+|         |                  |                    |                    |                      |                     |                    |                   |                |       |
+|         |                  |                    |                    |                      |                     |                    |                   |                |       |
+|  +-------------+   +----------------+   +----------------+   +-----------------+   +-------------------+   +---------------+   +----------------+   +--------------+   +---------+  |
+|  | DORMITÓRIOS |   |   REFEITÓRIO   |   |   ENFERMARIA   |   |     CENTRO      |   |     ÁREA DE       |   |  SALA DE      |   |   CENTRO DE    |   |  SALA DE     |   | ÁREA DE |  |
+|  | DA EQUIPE   |   |                |   |                |   |  RECREATIVO     |   |    TREINAMENTO    |   |  DESCANSO     |   |  OBSERVAÇÃO    |   |  REUNIÕES    |   | CARGA   |  |
+|  |             |   |                |   |                |   |                 |   |                   |   |               |   |                |   |              |   |         |  |
+|  |    [DE]     |   |      [RF]      |   |      [EN]      |   |      [CR]       |   |       [AT]        |   |     [SD]      |   |      [CO]      |   |     [SR]     |   |  [AC]   |  |
+|  +-------------+   +----------------+   +----------------+   +-----------------+   +-------------------+   +---------------+   +----------------+   +--------------+   +---------+  |
+|         |                  |                    |                    |                      |                     |                    |                   |                |       |
+|         |                  |                    |                    |                      |                     |                    |                   |                |       |
+|  +-------------+   +----------------+   +----------------+   +-----------------+   +-------------------+   +---------------+   +----------------+   +--------------+   +---------+  |
+|  | ELEVADOR    |   |   ELEVADOR     |   |    ELEVADOR    |   |    ELEVADOR     |   |     ELEVADOR      |   |   ELEVADOR    |   |    ELEVADOR    |   |   ELEVADOR   |   |ELEVADOR |  |
+|  | PRINCIPAL 1 |   |   PRINCIPAL 2  |   |    DE CARGA 1  |   |    DE CARGA 2   |   |   DE EMERGÊNCIA   |   | DE SERVIÇO 1  |   |  DE SERVIÇO 2  |   |  EXECUTIVO   |   |  VIP    |  |
+|  |    [EP1]    |   |      [EP2]     |   |     [EC1]      |   |      [EC2]      |   |       [EE]        |   |     [ES1]     |   |     [ES2]      |   |    [EX]      |   |  [EV]   |  |
+|  +-------------+   +----------------+   +----------------+   +-----------------+   +-------------------+   +---------------+   +----------------+   +--------------+   +---------+  |
+|                                                                                                                                                                                     |
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Legenda:
+[CP] - Sala de Controle Principal   [CR] - Câmara de Resfriamento    [LT] - Laboratório de Testes    [CD] - Centro de Dados
+[AC] - Armazenamento de Combustível [SC] - Sala de Criogenia         [MT] - Manutenção de Trajes     [ED] - Estação de Descontaminação
+[CI] - Câmara Ion                   [GA] - Gerador Auxiliar          [CC] - Câmara de Compressão     [ER] - Estação de Reciclagem
+[COM] - Centro de Comunicações      [DS] - Depósito de Suprimentos   [LP] - Laboratório de Propulsão [SS] - Sala de Simulação
+[CA] - Controle Ambiental           [NF] - Núcleo de Fusão           [OR] - Oficina de Robótica      [CCN] - Câmara de Contenção
+[PR] - Processamento de Resíduos    [LX] - Laboratório de Xenobiologia [CPA] - Centro de Pesquisa Avançada
+[CD] - Controle de Drones           [EC] - Estação de Carregamento   [AP] - Armazém de Peças         [STM] - Sala de Testes de Motores
+[SB] - Sala de Briefing             [LMA] - Lab. de Materiais Avançados [CMS] - Centro de Manutenção de Sistemas
+[CTP] - Câmara de Teste de Pressão  [OEQ] - Oficina de Eng. Quântica [EMR] - Estação de Monitoramento de Radiação
+[LEP] - Lab. de Energia Plasmática  [SCG] - Sala de Controle de Gravidade [CDC] - Centro de Comando
+[DE] - Dormitórios da Equipe        [RF] - Refeitório                [EN] - Enfermaria               [CR] - Centro Recreativo
+[AT] - Área de Treinamento          [SD] - Sala de Descanso          [CO] - Centro de Observação     [SR] - Sala de Reuniões
+[AC] - Área de Carga
+[EP1/2] - Elevador Principal 1/2    [EC1/2] - Elevador de Carga 1/2  [EE] - Elevador de Emergência
+[ES1/2] - Elevador de Serviço 1/2   [EX] - Elevador Executivo        [EV] - Elevador VIP
+        </pre>
+    </div>
+</body>
+</html>

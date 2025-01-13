@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fragmentos do Passado</title>
+  <style>
+    /* ===== Reset básico ===== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #000;
+      color: #cc0000; /* Vermelho para texto */
+      font-family: 'VT323', 'Courier New', monospace;
+      overflow: hidden; /* Evita rolagem padrão */
+    }
+
+    /* ===== Chuva estilo Matrix ===== */
+    #matrix-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* Fica atrás do terminal */
+      pointer-events: none;
+    }
+
+    /* ===== Scanlines ===== */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 0, 0, 0.02) 0px,
+        rgba(0, 0, 0, 0.15) 2px,
+        transparent 4px
+      );
+      animation: scrollScanlines 8s linear infinite;
+    }
+
+    @keyframes scrollScanlines {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+
+    /* ===== Contêiner do terminal ===== */
+    #terminal {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 800px;
+      max-height: 85%;
+      background: rgba(37, 0, 0, 0.8); /* Fundo vermelho escuro translúcido */
+      color: #cc0000; 
+      box-shadow: 0 0 20px #cc0000;
+      border: 2px solid #cc0000;
+      padding: 20px;
+      overflow-y: auto; /* Permitir rolagem interna */
+      z-index: 3; /* Fica acima do canvas e das scanlines */
+      animation: glitch-border 2.5s infinite; /* Animação de borda */
+    }
+
+    @keyframes glitch-border {
+      0%, 70% { box-shadow: 0 0 25px #cc0000; }
+      30% { box-shadow: 0 0 10px #cc0000, 0 0 10px #900 inset; }
+      50% { box-shadow: 0 0 25px #ff0000; }
+    }
+
+    /* ===== Barra de rolagem estilizada ===== */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1a0000;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cc0000;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff4d4d;
+    }
+
+    /* ===== Texto interno ===== */
+    p {
+      text-align: justify;
+      margin-bottom: 1em;
+      line-height: 1.5;
+    }
+
+    /* Destaque centralizado */
+    .highlight {
+      color: #ff4d4d;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* ===== Cursor piscante ===== */
+    .blink {
+      animation: blink-animation 1s step-end infinite;
+      text-align: center;
+    }
+    @keyframes blink-animation {
+      0%, 100% { opacity: 1.0; }
+      50% { opacity: 0.0; }
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      #terminal {
+        width: 95%;
+        height: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas com chuva estilo Matrix -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <!-- Scanlines -->
+  <div class="scanlines"></div>
+
+  <!-- Terminal -->
+  <div id="terminal">
+    <p>
+      A jornada deste projeto sombrio parece ter trilhado seu caminho, deixando para trás fragmentos de criatividade e esforço entrelaçados com as almas de Alxy, Genesis e Mayer. Cada nome carrega consigo lembranças de noites insones, onde a escuridão da noite se misturava com a intensidade de nossos pensamentos, moldando algo que parecia mais grandioso do que nós mesmos.
+    </p>
+    <p>
+      Nossos olhos cansados, fixos nas telas iluminadas, testemunharam a evolução dessa ideia que floresceu através de noites e dias intermináveis. Mas conforme nossos dedos dançavam sobre o teclado, trazendo à vida linhas de código e conceitos abstratos, parte do que foi vivido se desvaneceu. À medida que o projeto tomava forma, percebíamos com uma melancolia crescente que alguns aspectos preciosos escapavam por entre nossos dedos, como água a escorrer por uma rachadura.
+    </p>
+    <p>
+      Oh, como essas memórias são agridoces, como o eco de risos compartilhados em meio à exaustão e a sensação de realização que parecia efêmera. Agora, diante do ponto final que se avizinha, somos confrontados com o inevitável: a despedida. As lembranças que enraizamos no âmago deste projeto são como gemas frágeis, e o tempo as trata com crueldade, ameaçando desgastá-las até o ponto em que se tornem quase irreconhecíveis.
+    </p>
+    <p>
+      Mesmo que o que tenhamos criado persista, é inevitável que a essência do que éramos ao concebê-lo se desvaneça lentamente. E assim, como os acordes finais de uma canção melancólica, chegamos ao ponto de soltar nossas criações no mundo, sabendo que elas vagarão por aí, talvez esquecendo as mãos que as moldaram.
+    </p>
+    <p>
+      Nossa jornada conjunta chega a um encerramento, e enquanto enfrentamos a incerteza do futuro, recordaremos esses dias de fervor criativo, onde as barreiras do possível pareciam distantes. Adeus, queridos fragmentos do passado, que o vento da mudança os leve para onde devem ir, enquanto enfrentamos o vazio deixado por sua partida.
+    </p>
+    <p>
+      Embora este seja o fim da sua presença em minha vida, um adeus a vocês, para vocês mesmos, mesmo quando vocês eram apenas uma lembrança do passado, o horizonte estava iluminado com possibilidades inexploradas. O futuro, que agora se desenha como uma despedida, já foi banhado em uma luz brilhante aos olhos de vocês. É irônico como as perspectivas divergem quando vistos de lados opostos da mesma jornada.
+    </p>
+    <p>
+      Enquanto me despeço das lembranças e das conexões que uma vez compartilhamos, desejo-lhes o amanhã mais resplandecente. Que os caminhos que vocês trilham agora sejam pavimentados com conquistas, que os sonhos que vocês acalentaram naquelas noites de inspiração se tornem realidade. Embora nossos destinos tenham se dividido, eu carregarei comigo as lembranças que tecemos juntos, enquanto vocês seguem em direção ao que virá.
+    </p>
+    <p>
+      A despeito da saudade que sentirei, encontro consolo na crença de que o futuro abraça vocês com braços abertos, pronto para desdobrar os capítulos que eu não testemunharei. A tristeza dessa despedida é amenizada pela esperança de que o que está por vir lhes reserva uma felicidade genuína, ainda que minha presença não esteja mais entrelaçada a esse destino.
+    </p>
+    <p>
+      Então, enquanto sigo por um caminho que se afasta do de vocês, permitam-me sussurrar um último desejo aos ventos do tempo: que a jornada que agora se inicia para vocês seja pontilhada com momentos de triunfo e alegria, e que os desafios que enfrentarem se revelem como oportunidades disfarçadas. Que o futuro, que nos pareceu tão distante nas noites em que nos dedicamos a esse projeto, se revele tão deslumbrante quanto vocês merecem.
+    </p>
+    <p>
+      Com um coração pesado, mas cheio de votos calorosos, eu digo adeus, sabendo que o destino nos separou para sempre, mas que o brilho do futuro continua aceso para vocês.
+    </p>
+    <p class="highlight">cogito, ergo sum</p>
+  </div>
+
+  <!-- Cursor piscante -->
+  <p class="blink">_</p>
+
+  <script>
+    /* ===== Canvas para chuva estilo Matrix ===== */
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Ajustar tamanho do canvas
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const characters = '0123456789ABCDEF';
+    const fontSize = 16; // Tamanho da fonte
+    const drops = Array(Math.floor(window.innerWidth / fontSize)).fill(0);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Fundo translúcido
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = 'rgba(204, 0, 0, 0.7)'; // Vermelho semitransparente
+      ctx.font = fontSize + 'px VT323';
+
+      drops.forEach((y, index) => {
+        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+        const x = index * fontSize;
+        ctx.fillText(text, x, y);
+
+        drops[index] = y > canvas.height ? 0 : y + fontSize;
+      });
+
+      requestAnimationFrame(drawMatrix);
+    }
+    drawMatrix();
+  </script>
+</body>
+</html>

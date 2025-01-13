@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exploração do Templo Antigo</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: 'Courier New', monospace;
+        background-color: #000;
+        color: #0f0;
+        overflow: hidden;
+    }
+    .temple {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: url('https://i.imgur.com/XJRGvX9.jpg') no-repeat center center;
+        background-size: cover;
+        overflow: auto;
+    }
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+    }
+    .content {
+        position: relative;
+        z-index: 1;
+        padding: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        text-shadow: 0 0 5px #0f0;
+    }
+    h1 {
+        text-align: center;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+        from { text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 15px #0f0; }
+        to { text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0; }
+    }
+    p {
+        line-height: 1.6;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s, transform 0.5s;
+    }
+    .visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .artifact {
+        display: inline-block;
+        margin: 10px;
+        padding: 5px 10px;
+        border: 1px solid #0f0;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .artifact:hover {
+        background-color: rgba(0,255,0,0.2);
+    }
+    #artifactDescription {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        background-color: rgba(0,0,0,0.8);
+        padding: 10px;
+        border: 1px solid #0f0;
+        display: none;
+    }
+</style>
+</head>
+<body>
+<div class="temple">
+    <div class="overlay"></div>
+    <div class="content">
+        <h1>Exploração do Templo Antigo</h1>
+        <div id="story"></div>
+        <div id="artifacts">
+            <span class="artifact" data-description="Um candelabro de ouro com sete braços, emanando uma luz misteriosa.">Candelabro</span>
+            <span class="artifact" data-description="Uma árvore que promete vida eterna para uma fração peculiar da humanidade.">Árvore da Vida</span>
+            <span class="artifact" data-description="Uma espada que simboliza a sabedoria, cortando profundamente na alma.">Espada da Sabedoria</span>
+            <span class="artifact" data-description="Um anel repousando sobre as águas, simbolizando a fragilidade da existência.">Anel das Águas</span>
+        </div>
+        <div id="artifactDescription"></div>
+    </div>
+</div>
+
+<script>
+    const story = [
+        "Em meio às intrincadas passagens do antigo templo, um observador silencioso presenciaria uma sequência de eventos que desafiavam qualquer explicação.",
+        "O explorador, após obter um artefato misterioso, conseguiu abrir a enigmática porta que guardava segredos inimagináveis.",
+        "Dentro do templo, um candelabro de ouro de sete braços lançava uma luz dourada que parecia ecoar na eternidade.",
+        "O ambiente se assemelhava a um labirinto de corredores intermináveis e portais dimensionais, onde a realidade e a ilusão se entrelaçavam, e cada passo revelava um novo mistério.",
+        // ... (adicione mais parágrafos conforme necessário)
+    ];
+
+    const storyContainer = document.getElementById('story');
+    let currentParagraph = 0;
+
+    function displayNextParagraph() {
+        if (currentParagraph < story.length) {
+            const p = document.createElement('p');
+            p.textContent = story[currentParagraph];
+            storyContainer.appendChild(p);
+            setTimeout(() => p.classList.add('visible'), 100);
+            currentParagraph++;
+            setTimeout(displayNextParagraph, 5000);
+        }
+    }
+
+    displayNextParagraph();
+
+    const artifacts = document.querySelectorAll('.artifact');
+    const artifactDescription = document.getElementById('artifactDescription');
+
+    artifacts.forEach(artifact => {
+        artifact.addEventListener('click', () => {
+            artifactDescription.textContent = artifact.dataset.description;
+            artifactDescription.style.display = 'block';
+            setTimeout(() => artifactDescription.style.display = 'none', 3000);
+        });
+    });
+</script>
+</body>
+</html>

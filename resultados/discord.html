@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERRO CRÍTICO - INFRANET CORROMPIDA</title>
+  <style>
+    /* Configuração Principal */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: black;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    /* Título Principal */
+    .title {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #ff0000;
+      text-shadow: 0 0 15px #ff0000;
+      animation: glitch 1.5s infinite;
+      z-index: 3;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 1px 1px 5px #ff0000; }
+      20% { text-shadow: -2px 0 5px #ff5555; }
+      40% { text-shadow: 3px -3px 5px #ff0000; }
+      60% { text-shadow: -1px 2px 5px #ff5555; }
+      100% { text-shadow: 0 0 5px #ff0000; }
+    }
+
+    /* Mensagens de erro */
+    .error-message {
+      font-size: 1.5rem;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      z-index: 3;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Link Suspeito */
+    .discord-link {
+      color: #00ff00;
+      font-size: 1.7rem;
+      text-decoration: none;
+      background: none;
+      letter-spacing: 2px;
+      animation: flash 1s infinite;
+      z-index: 3;
+    }
+
+    .discord-link:hover {
+      color: #ff0000;
+      text-shadow: 0 0 10px #ff0000;
+    }
+
+    @keyframes flash {
+      0%, 100% { color: #00ff00; }
+      50% { color: transparent; }
+    }
+
+    /* Barra de Exclusão */
+    .deletion-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 8px;
+      background-color: #ff0000;
+      animation: deletion 6s linear forwards;
+      z-index: 4;
+    }
+
+    @keyframes deletion {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    /* Olhos Piscantes */
+    .eye {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      background: url('') no-repeat center center;
+      background-size: cover;
+      animation: blink-eye 4s infinite ease-in-out;
+      opacity: 0.8;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    @keyframes blink-eye {
+      0%, 90%, 100% { opacity: 1; }
+      95% { opacity: 0; }
+    }
+
+    /* Glitch Interferente */
+    .corrupt-effect {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        90deg,
+        #000 0px,
+        #000 2px,
+        #00ff00 4px,
+        #000 6px
+      );
+      opacity: 0.08;
+      animation: corrupt 0.05s infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes corrupt {
+      0%, 100% { transform: none; }
+      50% { transform: translate(2px, 2px); }
+    }
+
+    /* Fundo de Fundo Glitch */
+    @keyframes glitch-background {
+      0% { background-color: black; }
+      50% { background-color: #020202; }
+      100% { background-color: black; }
+    }
+    body {
+      animation: glitch-background 0.2s infinite;
+    }
+
+    /* Tela Final com Registro */
+    .ip-info {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 1.2rem;
+      color: #00ff00;
+      z-index: 5;
+      opacity: 0;
+      animation: fadeIn 1.5s forwards;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">ERRO CRÍTICO - INFRANET CORROMPIDA</div>
+    <div class="error-message" style="animation-delay: 1s;">
+      [A.S.T.R.A DETECTOU ATIVIDADE HOSTIL]
+    </div>
+    <div class="error-message" style="animation-delay: 2.5s;">
+      Arquivo <span style="color: #ff5555;">DISCORD</span> encontrado. 
+    </div>
+    <div class="error-message" style="animation-delay: 3.5s;">
+      <a href="https://discord.gg/yrz49twGdV" target="_blank" class="discord-link">https://discord.gg/yrz49twGdV</a>
+    </div>
+    <div class="error-message" style="animation-delay: 4.5s;">
+      INICIALIZANDO PROTOCOLO DE EXCLUSÃO...
+    </div>
+    <div class="deletion-bar"></div>
+    <div class="corrupt-effect"></div>
+  </div>
+
+  <!-- Final com Registro do IP -->
+  <div class="ip-info" id="ip-info-element" style="display: none;">
+    <p>A.S.T.R.A registrou as seguintes informações:</p>
+    <p>IP: <span id="ip"></span></p>
+    <p>Localização: <span id="location"></span></p>
+  </div>
+
+  <script>
+    // Adicionando olhos aleatórios que piscam pela tela inteira
+    function createEyes() {
+      for (let i = 0; i < 15; i++) {
+        const eye = document.createElement('div');
+        eye.className = 'eye';
+        eye.style.left = Math.random() * window.innerWidth + 'px';
+        eye.style.top = Math.random() * window.innerHeight + 'px';
+        document.body.appendChild(eye);
+      }
+    }
+
+    createEyes();
+
+    // Após 6 segundos, simula exclusão e registra dados
+    setTimeout(() => {
+      document.querySelector('.container').remove();
+      document.getElementById('ip-info-element').style.display = 'block';
+
+      // Simula uma "captura de IP e localização"
+      fetch('https://ipapi.co/json/')
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById('ip').textContent = data.ip || 'Desconhecido';
+          document.getElementById('location').textContent = 
+            `${data.city || 'Cidade Desconhecida'}, ${data.region || 'Região Desconhecida'}, ${data.country_name || 'País Desconhecido'}`;
+        })
+        .catch(() => {
+          document.getElementById('ip').textContent = 'Erro ao capturar.';
+          document.getElementById('location').textContent = 'Erro ao capturar.';
+        });
+    }, 6000);
+  </script>
+</body>
+</html>

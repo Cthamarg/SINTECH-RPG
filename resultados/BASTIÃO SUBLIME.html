@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ORDEM DO BASTIÃO SUBLIME</title>
+  <!-- Fonte estilo retrô/terminal -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Para ocupar 100% da tela */
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* Rolagem apenas no terminal */
+      font-family: 'VT323', monospace;
+      background: #000;
+      color: #cc0000;
+      position: relative;
+    }
+
+    /* Canvas da chuva estilo "Matrix hacking" */
+    #matrix-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* Fica no fundo */
+      pointer-events: none; /* Permite interação com o terminal */
+    }
+
+    /* Scanlines sobre toda a tela */
+    .scanlines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2; 
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 0, 0, 0.02) 0px,
+        rgba(0, 0, 0, 0.15) 2px,
+        transparent 4px
+      );
+      animation: scrollScanlines 8s linear infinite;
+    }
+    @keyframes scrollScanlines {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+
+    /* Terminal container */
+    #terminal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(37,0,0,0.7) 20%, rgba(6,0,0,0.7) 90%);
+      z-index: 3; /* Acima do canvas */
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: glitch-border 2.5s infinite;
+    }
+
+    /* Personalização da barra de rolagem */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1a0000;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cc0000;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff4d4d;
+    }
+
+    /* Animação de borda glitch */
+    @keyframes glitch-border {
+      0%, 70% { box-shadow: 0 0 25px #cc0000; }
+      30% { box-shadow: 0 0 10px #cc0000, 0 0 10px #900 inset; }
+      50% { box-shadow: 0 0 25px #ff0000; }
+    }
+
+    /* Conteúdo centralizado */
+    .terminal-content {
+      background-color: rgba(20, 0, 0, 0.65);
+      box-shadow: 0 0 30px #cc0000;
+      width: 90%;
+      max-width: 1000px;
+      padding: 30px;
+      animation: flickerAnim 6s infinite;
+      text-align: left;
+      margin: 40px 0;
+    }
+
+    @keyframes flickerAnim {
+      0%, 6%, 18%, 70%, 100% { opacity: 1; }
+      3%, 10%, 50%, 90% { opacity: 0.85; }
+    }
+
+    /* Títulos */
+    h1 {
+      font-size: 1.8em;
+      color: #ff3b3b;
+      text-align: center;
+      text-shadow: 0 0 4px #cc0000;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      font-size: 1.4em;
+      color: #ff4d4d;
+      text-shadow: 0 0 4px #cc0000;
+      margin: 20px 0 10px;
+    }
+
+    /* Parágrafos e listas */
+    p {
+      margin-bottom: 12px;
+      line-height: 1.5em;
+    }
+
+    ul {
+      margin-left: 30px;
+      margin-bottom: 20px;
+    }
+
+    ul li {
+      padding: 5px 0;
+    }
+
+    /* Rodapé ou Prompt */
+    #prompt {
+      color: #ff1a1a;
+      margin-top: 20px;
+      text-align: center;
+      text-shadow: 0 0 6px #cc0000;
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      .terminal-content {
+        padding: 20px;
+        font-size: 0.95em;
+      }
+      h1 { font-size: 1.4em; }
+      h2 { font-size: 1.2em; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Canvas com chuva estilo Matrix -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <!-- Scanlines -->
+  <div class="scanlines"></div>
+
+  <!-- Terminal -->
+  <div id="terminal">
+    <div class="terminal-content">
+      <h1>ORDEM DO BASTIÃO SUBLIME</h1>
+      <p><strong>Facção:</strong> Organização fascista que acredita na “salvação” pelo abandono do nível -5.</p>
+      <p><strong>Líder:</strong> Portador Heráldico Orondis Garran, um orador carismático e impiedoso.</p>
+
+      <h2>Motivação Principal</h2>
+      <p>
+        Unificar os andares inferiores sob um governo único e iniciar uma “cruzada” para
+        conquistar os andares superiores da nave.
+      </p>
+
+      <h2>Descrição</h2>
+      <p>
+        A Ordem do Bastião Sublime é um movimento rígido e autoritário que busca “purificar”
+        o nível -5, unificando todos os habitantes sob seu regime, para então marchar rumo
+        aos conveses superiores. Eles pregam que só uma sociedade militarizada, devota a um
+        líder supostamente iluminado, pode escapar das sombras desse nível condenado. A doutrina
+        justifica extrema violência contra dissidentes, androides e qualquer um que se recuse 
+        a se curvar à Ordem.
+      </p>
+
+      <h2>Crenças e Valores</h2>
+      <ul>
+        <li><strong>Destino Manifesto:</strong> acreditam ser “escolhidos” para liderar o renascimento e a reocupação da nave.</li>
+        <li><strong>Força pela Disciplina:</strong> cultuam a violência e impõem punições exemplares a qualquer forma de questionamento.</li>
+        <li><strong>Identidade Fascista:</strong> inspiram-se em regimes totalitários antigos, pregando rigidez moral e extrema subserviência.</li>
+      </ul>
+
+      <h2>Atividades Conhecidas</h2>
+      <ul>
+        <li><strong>Recrutamento Forçado:</strong> obrigam habitantes das áreas periféricas a se unirem à Ordem; recusas levam à morte ou escravização.</li>
+        <li><strong>Sabotagem:</strong> infiltram-se em outras facções e desestabilizam lideranças para gerar caos.</li>
+        <li><strong>Rituais de Glorificação:</strong> utilizam cultos à figura de Orondis Garran, espalhando propaganda e exibições públicas de força.</li>
+      </ul>
+
+      <h2>Possíveis Conflitos</h2>
+      <p>
+        A Ordem do Bastião Sublime tem como principal objetivo subjugar ou erradicar
+        outras facções dos níveis inferiores, especialmente androides, que consideram
+        "abominações". Seu expansionismo inevitavelmente causa conflitos com os
+        recursos limitados controlados por outras facções.
+      </p>
+
+      <div id="prompt">[A.S.T.R.A.//Terminal] - Catálogo encerrado para "ORDEM DO BASTIÃO SUBLIME".</div>
+    </div>
+  </div>
+
+  <!-- Script da Chuva Matrix -->
+  <script>
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const characters = '0123456789ABCDEF';
+    const fontSize = 16;
+    let drops = [];
+
+    function initDrops() {
+      const columns = Math.floor(canvas.width / fontSize);
+      drops = Array(columns).fill(0);
+    }
+    initDrops();
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = 'rgba(204, 0, 0, 0.7)';
+      ctx.font = fontSize + 'px VT323';
+
+      drops.forEach((y, x) => {
+        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+        ctx.fillText(text, x * fontSize, y);
+        drops[x] = y > canvas.height ? 0 : y + fontSize;
+      });
+
+      requestAnimationFrame(drawMatrix);
+    }
+    drawMatrix();
+  </script>
+</body>
+</html>

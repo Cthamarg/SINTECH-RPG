@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Eden - Arquivo Infranet</title>
+  <style>
+    /* -------- RESET -------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* -------- CONFIGURAÇÕES GERAIS -------- */
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #000; /* Fundo Preto Estilo Fallout */
+      color: #78F443;   /* Verde Neon Terminal */
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* -------- CONTAINER PRINCIPAL -------- */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      padding: 20px;
+      background: radial-gradient(circle at center, rgba(120, 244, 67, 0.1), transparent 80%);
+      border: 2px solid #78F443;
+      box-shadow: 0 0 15px #00ff00;
+      overflow-y: auto;
+      height: 90%;
+    }
+
+    /* -------- SCROLLBAR CUSTOMIZADO -------- */
+    .container::-webkit-scrollbar {
+      width: 8px;
+    }
+    .container::-webkit-scrollbar-track {
+      background: #003300;
+    }
+    .container::-webkit-scrollbar-thumb {
+      background: #78F443;
+      border-radius: 4px;
+    }
+    .container::-webkit-scrollbar-thumb:hover {
+      background: #98ff70;
+    }
+
+    /* -------- TÍTULO PRINCIPAL -------- */
+    .main-title {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 20px;
+      animation: glitch 1.5s infinite alternate;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 1px 1px 3px #00ff00, -1px -1px 2px #78F443; }
+      50% { text-shadow: -2px -2px 3px #78F443, 2px -1px 3px #00ff00; }
+      100% { text-shadow: 2px -2px 2px #78F443, -2px 1px 3px #00ff00; }
+    }
+
+    /* -------- SEÇÃO DE TÓPICOS -------- */
+    section {
+      margin-bottom: 20px;
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      border-bottom: 1px dashed #78F443;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      text-shadow: 0 0 4px #78F443;
+    }
+
+    section p {
+      line-height: 1.8;
+      text-align: justify;
+      text-shadow: 0 0 2px #78F443;
+    }
+
+    /* -------- SCANLINES E INTERFERÊNCIA -------- */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          rgba(120, 244, 67, 0.05) 50%, 
+          transparent 50%
+        );
+      background-size: 100% 3px;
+      animation: flicker 0.1s steps(1) infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.98; }
+    }
+
+    /* -------- RESPONSIVIDADE -------- */
+    @media (max-width: 768px) {
+      .main-title {
+        font-size: 1.6rem;
+      }
+
+      section h2 {
+        font-size: 1.2rem;
+      }
+
+      section p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Overlay de Scanlines -->
+  <div class="scanlines"></div>
+
+  <!-- Container Principal -->
+  <div class="container">
+    <h1 class="main-title">New Eden - Arquivo Infranet</h1>
+
+    <!-- Seção: Introdução -->
+    <section>
+      <h2>O Pináculo da Civilização Espacial</h2>
+      <p>
+        A <strong>New Eden</strong> não é apenas uma nave; é o ápice da engenharia humana, projetada para ser um ecossistema urbano 
+        autossuficiente em meio à vastidão do espaço. Concebida pela <strong>BioGênesisCorp</strong>, sob a direção implacável 
+        da clone <strong>Sophia Drakos (Nº 900)</strong>, a New Eden é uma tentativa de continuar e expandir os princípios que 
+        deram vida ao <strong>Projeto Viena</strong>.
+      </p>
+      <p>
+        Este colosso foi criado para transcender as limitações terrestres e garantir a sobrevivência da humanidade, 
+        combinando clonagem, autossuficiência e inovação tecnológica em uma escala jamais vista.
+      </p>
+    </section>
+
+    <!-- Seção: Dimensões e Estrutura -->
+    <section>
+      <h2>Dimensões e Estrutura</h2>
+      <p>
+        Com dimensões impressionantes, a New Eden possui cerca de <strong>530 km de comprimento</strong>, <strong>455 km de largura</strong> 
+        e <strong>300 km de altura</strong>. Ela é dividida em <strong>75 andares habitáveis</strong>, 
+        projetados para fornecer espaço para milhões de habitantes.
+      </p>
+      <p>
+        A estrutura da nave inclui <strong>10 megadistritos</strong>, cada um funcionando como uma unidade semi-independente 
+        de gestão de recursos e serviços. Subdivididos em **30 bairros**, esses megadistritos formam uma teia urbana 
+        que integra funções sociais, econômicas e industriais.
+      </p>
+      <p>
+        Seu design modular permite o isolamento de setores em crises, garantindo a sustentabilidade e segurança da nave, 
+        mesmo em situações extremas. O layout vertical reflete as hierarquias sociais da Realidade 978, com elites ocupando 
+        os andares superiores e zonas industriais e de trabalho pesado situadas nos níveis inferiores.
+      </p>
+    </section>
+
+    <!-- Seção: Clonagem e Sociedade -->
+    <section>
+      <h2>Clonagem e Sociedade</h2>
+      <p>
+        Baseada no legado do <strong>Projeto Viena</strong>, a New Eden é um exemplo máximo da aplicação de clonagem em escala global. 
+        Cada habitante da nave pode ter seu corpo substituído por clones geneticamente otimizados, promovendo longevidade e saúde. 
+        Esse sistema não apenas preserva a vida, mas a melhora com avanços genéticos constantes.
+      </p>
+      <p>
+        A sociedade da New Eden é rigidamente controlada pela clonagem. Novos cidadãos não nascem da maneira natural, mas são 
+        criados em laboratórios, garantindo que defeitos genéticos sejam eliminados e garantindo características desejáveis. 
+        Para uns, isso é progresso; para outros, é uma prisão genética projetada para controle corporativo absoluto.
+      </p>
+    </section>
+
+    <!-- Seção: Ambição e Controvérsias -->
+    <section>
+      <h2>Ambição e Controvérsias</h2>
+      <p>
+        A New Eden é uma maravilha tecnológica, mas também carrega em si uma série de controvérsias. O controle total da BioGênesisCorp 
+        sobre a nave e seus habitantes levanta questões éticas. A dependência extrema da clonagem gerou críticas de que o sistema 
+        elimina a liberdade individual em prol de uma sociedade biologicamente perfeita, mas moralmente questionável.
+      </p>
+      <p>
+        Com diferenças sociais tão marcantes entre elites e trabalhadores, a organização vertical da nave reflete uma hierarquia 
+        social brutal. Ainda assim, Sophia Drakos via a New Eden como o modelo definitivo para o futuro da humanidade, um marco 
+        de sobrevivência e autossuficiência interestelar.
+      </p>
+    </section>
+  </div>
+</body>
+</html>

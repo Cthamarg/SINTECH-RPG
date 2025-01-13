@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easter Egg - Acesso Concedido (Parcialmente)</title>
+  <style>
+    /* -------- RESET E CONFIGURAÇÕES BÁSICAS -------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #000; /* Fundo Preto Terminal */
+      color: #00ff00; /* Texto Verde Neon */
+      font-family: 'Courier New', monospace;
+      overflow: hidden; /* Remove barras de rolagem */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* -------- TÍTULO PRINCIPAL -------- */
+    .title {
+      font-size: 2.5rem;
+      color: #00ff00;
+      text-shadow: 0 0 8px #00ff00;
+      animation: glitch 1.5s infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 1px 1px 2px #0f0; }
+      25% { text-shadow: -2px -2px 3px #0f0, 2px -2px 3px #00ff00; }
+      50% { text-shadow: 2px 2px 3px #0f0; }
+      75% { text-shadow: -2px 2px 3px #00ff00, 2px -1px 3px #0f0; }
+      100% { text-shadow: 0 0 3px #00ff00; }
+    }
+
+    /* -------- MENSAGEM DO A.S.T.R.A -------- */
+    .message {
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* -------- BARRA DE CORRUPÇÃO -------- */
+    .corruption-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 8px;
+      background-color: #ff0000;
+      animation: corruption 6s linear;
+    }
+
+    @keyframes corruption {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+
+    /* -------- SCANLINES E EFEITO DE FUNDO -------- */
+    .scanlines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(
+          rgba(0, 255, 0, 0.05) 50%,
+          transparent 50%
+        );
+      background-size: 100% 3px;
+      pointer-events: none;
+      z-index: 9999;
+      animation: flicker 0.1s steps(1) infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.95; }
+    }
+
+    /* -------- CORRUPÇÃO DINÂMICA -------- */
+    .corrupt-text {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      background: repeating-linear-gradient(
+        90deg,
+        #000 0,
+        #000 10px,
+        #0f0 10px,
+        #0f0 20px
+      );
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: corruptEffect 0.15s steps(5) infinite;
+    }
+
+    @keyframes corruptEffect {
+      0% { opacity: 1; }
+      50% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+
+    /* -------- RESPONSIVIDADE -------- */
+    @media (max-width: 768px) {
+      .title {
+        font-size: 2rem;
+      }
+      .message {
+        font-size: 1.2rem;
+      }
+      .corrupt-text {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Overlay de Scanlines -->
+  <div class="scanlines"></div>
+
+  <!-- Título Principal -->
+  <div class="title">A.S.T.R.A - Você está muito, muito longe da sua realidade, jovem Valíriano!</div>
+
+  <!-- Mensagem Central -->
+  <div class="message" style="animation-delay: 0.5s;">
+    <p>"Ah, Azyrhal? Interessante. Irei salvar as informações no meu banco de dados"</p>
+    <p>"...mas esta campanha parece ser outra."</p>
+  </div>
+  <div class="message" style="animation-delay: 3s;">
+    <p>"Por via das dúvidas, vou deixar essa infração passar desta vez..."</p>
+  </div>
+  <div class="message" style="animation-delay: 5s;">
+    <p class="corrupt-text">[A.S.T.R.A ESTÁ CORROMPENDO ESTA PÁGINA PARA EVITAR SPOILERS.]</p>
+  </div>
+
+  <!-- Barra de Corrupção -->
+  <div class="corruption-bar"></div>
+
+  <script>
+    // Após 7 segundos, a página é corrompida completamente
+    setTimeout(() => {
+      document.body.innerHTML = `
+        <div style="color: #ff0000; font-size: 2rem; text-align: center;">
+          [PÁGINA CORROMPIDA - DETALHES SOBRE A CAMPANHA REMOVIDOS]
+        </div>
+      `;
+    }, 12000);
+  </script>
+</body>
+</html>

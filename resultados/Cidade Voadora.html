@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento Confidencial: New Eden e a Família Blackwell</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        /* Paleta de cores e variáveis */
+        :root {
+            --background-color: #000000;
+            --primary-color: #cc0000; /* Vermelho principal */
+            --secondary-color: #ff4d4d; /* Vermelho mais claro */
+            --text-color: #ff3b3b; /* Cor do texto */
+            --highlight-color: #ff6666; /* Destaques */
+        }
+
+        /* Reset e configurações gerais */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'VT323', monospace;
+            font-size: 18px;
+            overflow: hidden;
+        }
+
+        /* Fundo estilo Matrix */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Atrás do conteúdo */
+            pointer-events: none;
+        }
+
+        /* Scanlines */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(255, 0, 0, 0.02) 0px,
+                rgba(0, 0, 0, 0.15) 2px,
+                transparent 4px
+            );
+            animation: scanlines-animation 8s linear infinite;
+        }
+
+        @keyframes scanlines-animation {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(37, 0, 0, 0.85); /* Fundo translúcido */
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 20px var(--primary-color);
+            z-index: 3;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Titulo da página */
+        .title {
+            text-align: center;
+            color: var(--secondary-color);
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--secondary-color);
+        }
+
+        /* Subtítulos */
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 5px;
+        }
+
+        /* Conteúdo das seções */
+        .section-content {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li::before {
+            content: ">"; /* Marcador de lista */
+            color: var(--secondary-color);
+            margin-right: 10px;
+        }
+
+        /* Botão de voltar */
+        #back-button {
+            display: block;
+            margin: 0 auto;
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            border: none;
+            padding: 10px 20px;
+            font-family: 'VT323', monospace;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #back-button:hover {
+            background-color: var(--secondary-color);
+            box-shadow: 0 0 10px var(--secondary-color);
+        }
+
+        /* Cursor piscante */
+        .blink {
+            color: var(--secondary-color);
+            animation: blink-animation 1s step-end infinite;
+        }
+
+        @keyframes blink-animation {
+            50% { opacity: 0; }
+        }
+
+        /* Barra de rolagem personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a0000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .title {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.2em;
+            }
+
+            #back-button {
+                font-size: 0.9em;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fundo estilo Matrix -->
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Scanlines -->
+    <div class="scanlines"></div>
+
+    <!-- Conteúdo principal -->
+    <div class="container">
+        <h1 class="title">DOCUMENTO CONFIDENCIAL</h1>
+        <div class="section-title">NEW EDEN E A FAMÍLIA BLACKWELL</div>
+        <div class="section-content">
+            <p>Os eventos se desenrolariam em New Eden, uma das grandes instalações espaciais, que agora é conhecida como "Cidade Voadora", administrada pela família Blackwell.</p>
+            <p>Não se sabe quantas gerações se passaram desde que os Blackwell trouxeram a humanidade para o espaço, mas desde então, novos domos nasceram. New Eden é apenas o original que subiu há centenas de anos.</p>
+            <p>A população atual de humanos é de cerca de 20 a 30 milhões de pessoas oficialmente. O controle populacional funciona bem quando apenas uma elite controla tudo.</p>
+            <p>Falando de Elite, temos a Família Blackwell, donos dos Domos. Eles são os fundadores, retornando à matriarca Evelynn Blackwell. Desde então, o poder está centrado apenas naqueles com sangue de origem da própria Terra. Todos nascidos puramente de pessoas sem famílias influentes tiveram sua linhagem diluída, e hoje são conhecidos apenas como Moradores do Eden, ou "Jaquetas Azuis".</p>
+            <p>New Eden é dividida em três grandes andares: o mais baixo, onde fica a periferia e os propulsores; o segundo nível, onde está o grande salão comercial; e o terceiro nível, exclusivo da Elite, conhecido como "Portão do Paraíso".</p>
+        </div>
+        <div class="section-title">FINAL DO DOCUMENTO - CONFIDENCIAL</div>
+        <p class="blink">_</p>
+        <button id="back-button" onclick="window.location.href = 'index.html';">RETORNAR À BUSCA</button>
+    </div>
+
+    <script>
+        /* Script para fundo estilo Matrix */
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const characters = '0123456789ABCDEF';
+        const fontSize = 16;
+        const drops = Array(Math.floor(canvas.width / fontSize)).fill(0);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = 'rgba(204, 0, 0, 0.7)';
+            ctx.font = `${fontSize}px VT323`;
+
+            drops.forEach((y, index) => {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                const x = index * fontSize;
+                ctx.fillText(text, x, y);
+
+                drops[index] = y > canvas.height ? 0 : y + fontSize;
+            });
+
+            requestAnimationFrame(drawMatrix);
+        }
+        drawMatrix();
+    </script>
+</body>
+</html>

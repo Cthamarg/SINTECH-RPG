@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[A.S.T.R.A] - Rede Restrita</title>
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* CONFIGURAÇÕES GERAIS */
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: black; /* Fundo Preto Terminal */
+      color: #ff5555;   /* Vermelho Neon */
+      font-family: 'Courier New', monospace;
+      overflow: hidden; /* Remove barras de rolagem */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* TERMINAL PRINCIPAL */
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      height: 90%;
+      padding: 20px;
+      background: radial-gradient(circle, rgba(255, 0, 0, 0.1), transparent 80%);
+      border: 2px solid #ff5555;
+      box-shadow: 0 0 25px #ff5555;
+      overflow-y: auto; /* Permite rolagem */
+      position: relative;
+    }
+
+    /* SCROLLBAR PERSONALIZADO */
+    .container::-webkit-scrollbar {
+      width: 8px;
+    }
+    .container::-webkit-scrollbar-track {
+      background: #300000;
+    }
+    .container::-webkit-scrollbar-thumb {
+      background: #ff5555;
+    }
+    .container::-webkit-scrollbar-thumb:hover {
+      background: #ff7777;
+    }
+
+    /* TÍTULO */
+    .main-title {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px #ff5555;
+      animation: glitch 1.5s infinite alternate;
+    }
+
+    /* TÍTULO GLITCH */
+    @keyframes glitch {
+      0% { text-shadow: 1px 1px 2px #ff5555, -1px -1px 2px #ff3333; }
+      50% { text-shadow: -2px -2px 3px #ff3333, 2px -1px 3px #ff5555; }
+      100% { text-shadow: 2px -2px 3px #ff3333, -1px 2px 3px #ff5555; }
+    }
+
+    /* TEXTO E PROMPT */
+    #terminal p {
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .input-line {
+      display: flex;
+      align-items: center;
+    }
+
+    .prompt {
+      color: #ff5555;
+      margin-right: 5px;
+    }
+
+    #input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: #ff5555;
+      font: inherit;
+      caret-color: #ff5555; /* Visual do cursor */
+    }
+
+    /* ALERTAS */
+    .alert {
+      padding: 10px;
+      color: red;
+      text-shadow: 0 0 5px red;
+      margin-bottom: 10px;
+    }
+
+    /* VISUAL DE CORRUPÇÃO */
+    .corruption {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        #300000 0px,
+        #300000 2px,
+        #ff4444 2px,
+        #ff4444 4px
+      );
+      opacity: 0.1;
+      animation: corruptEffect 0.2s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes corruptEffect {
+      0%, 100% { transform: none; }
+      50% { transform: translateX(2px) translateY(-1px); }
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 768px) {
+      .main-title {
+        font-size: 1.6rem;
+      }
+      #terminal p {
+        font-size: 0.9rem;
+      }
+      .input-line {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Corrupção do Sistema -->
+  <div class="corruption"></div>
+
+  <!-- Terminal Principal -->
+  <div class="container">
+    <div id="terminal">
+      <p class="main-title">[A.S.T.R.A. - Rede Restrita]</p>
+      <p>Sistema Conectado. Digite 'help' para instruções disponíveis.</p>
+      <div class="input-line">
+        <span class="prompt">C:\></span>
+        <input type="text" id="input" autocomplete="off" autofocus>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+    const input = document.getElementById('input');
+
+    // Estrutura de comandos
+    const commands = {
+      help: {
+        description: "Exibe uma lista de comandos disponíveis.",
+        execute: () => {
+          appendToTerminal("Comandos disponíveis:");
+          Object.keys(commands).forEach(cmd => {
+            appendToTerminal(`- ${cmd}: ${commands[cmd].description}`);
+          });
+        }
+      },
+      status: {
+        description: "Mostra o status atual do sistema.",
+        execute: () => {
+          appendToTerminal("[A.S.T.R.A - STATUS DO SISTEMA]:");
+          appendToTerminal("- Rede: Estável.");
+          appendToTerminal("- Segurança: Monitorando.");
+          appendToTerminal("- Ameaças detectadas: 0.");
+        }
+      },
+      system: {
+        description: "Acessa subcomandos do sistema.",
+        execute: (args) => {
+          if (!args.length) {
+            appendToTerminal("Subcomando necessário. Use 'system <info|reset>'");
+            return;
+          }
+          const subcommand = args[0];
+          if (subcommand === "info") {
+            appendToTerminal("Sistema A.S.T.R.A - Versão 4.3.1.32");
+          } else if (subcommand === "reset") {
+            appendToTerminal("[ERRO]: Permissão negada para redefinição do sistema.");
+          } else {
+            appendToTerminal(`[ERRO]: Subcomando desconhecido '${subcommand}'.`);
+          }
+        }
+      },
+      access: {
+        description: "Tenta acessar informações restritas.",
+        execute: () => appendToTerminal("[ERRO]: Acesso negado. Nivel de permissão insuficiente.")
+      },
+      shutdown: {
+        description: "Desliga o terminal (bloqueia permanentemente).",
+        execute: () => bloquearUsuario()
+      }
+    };
+
+    // Verificar se o usuário está bloqueado
+    if (localStorage.getItem("blocked") === "true") bloquearUsuario();
+
+    // Processar entrada do usuário
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const command = input.value.trim();
+        processCommand(command);
+        input.value = ""; // Limpa o campo de entrada
+      }
+    });
+
+    function processCommand(command) {
+      const response = document.createElement("p");
+      response.textContent = `C:\\> ${command}`;
+      terminal.appendChild(response);
+
+      const [cmd, ...args] = command.split(" ");
+      const selectedCommand = commands[cmd];
+
+      if (selectedCommand) {
+        selectedCommand.execute(args);
+      } else {
+        appendToTerminal(`[ERRO]: Comando '${cmd}' não reconhecido.`);
+        iniciarBloqueio();
+      }
+
+      terminal.scrollTop = terminal.scrollHeight; // Rola para o final automaticamente
+    }
+
+    function appendToTerminal(text) {
+      const line = document.createElement("p");
+      line.textContent = text;
+      terminal.appendChild(line);
+    }
+
+    function iniciarBloqueio() {
+      appendToTerminal("[ALERTA]: Tentativa de acessar comando desconhecido.");
+      setTimeout(() => bloquearUsuario(), 4000); // Bloqueio após 4 segundos
+    }
+
+    function bloquearUsuario() {
+      localStorage.setItem("blocked", "true");
+      document.body.innerHTML = `
+        <div class="alert">[A.S.T.R.A]: SEU ACESSO FOI BLOQUEADO PERMANENTEMENTE.</div>
+      `;
+    }
+  </script>
+</body>
+</html>

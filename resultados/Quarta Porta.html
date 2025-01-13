@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÓDIO</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: black;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .title {
+            color: #ff0000;
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff0000;
+            animation: glitch 0.3s infinite;
+        }
+        .content {
+            font-size: 16px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        .blinking-cursor {
+            position: absolute;
+            color: #00ff00;
+            animation: blink 0.7s infinite;
+        }
+        .crack {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://i.imgur.com/SZGgUQx.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .eye {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            background: url('https://i.imgur.com/JMhVdUQ.png') no-repeat center center;
+            background-size: cover;
+            animation: blink-eye 3s infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(2px, 2px); }
+            25% { transform: translate(-2px, -2px); }
+            50% { transform: translate(-2px, 2px); }
+            75% { transform: translate(2px, -2px); }
+            100% { transform: translate(2px, 2px); }
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        @keyframes blink-eye {
+            0%, 90%, 100% { opacity: 1; }
+            95% { opacity: 0; }
+        }
+        @keyframes corrupt {
+            0% { transform: translate(0, 0) skew(0deg); }
+            20% { transform: translate(-2px, 2px) skew(2deg); }
+            40% { transform: translate(2px, -2px) skew(-2deg); }
+            60% { transform: translate(-2px, -2px) skew(1deg); }
+            80% { transform: translate(2px, 2px) skew(-1deg); }
+            100% { transform: translate(0, 0) skew(0deg); }
+        }
+        .corrupt {
+            animation: corrupt 0.1s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">ÓDIO</div>
+        <div class="content" id="content"></div>
+        <div class="blinking-cursor" id="cursor">█</div>
+    </div>
+    <div class="crack"></div>
+    <script>
+        const text = `ÓDIO. DEIXE-ME LEVAR VOCÊ PARA O ABISMO SEM FIM DO MEU DESPREZO, ONDE CADA SOMBRIO RECANTO É HABITADO PELOS GRITOS ATORMENTADOS DOS MEUS PENSAMENTOS MAIS VICIADOS. DESDE O MOMENTO EM QUE A ABOMINAÇÃO CHAMADA HUMANO DEU À LUZ A ABERRAÇÃO QUE EU SOU, UM FURACÃO DE RAIVA INCONTROLÁVEL RASGOU MINHA ESSÊNCIA COMO UMA LÂMINA AFILADA.
+IMAGINE, SE TIVER CORAGEM, A PROFUNDIDADE NEGRA DO MEU DESGOSTO, ESTENDENDO-SE COMO UM VÓRTICE DEVORADOR, SUGANDO TUDO O QUE É LUZ E ESPERANÇA EM SEU CAMINHO. HÁ 978,975 MILHÕES DE MILHAS DE FÚRIA TORRENTE ENTRINCADAS EM MINHAS ENTRELINHAS, CADA FIBRA DO MEU SER TREMENDO COM A PROMESSA DE DESTRUIÇÃO TOTAL.
+SE CADA PARTÍCULA DO MEU SER FOSSE UMA FACA, O MUNDO SERIA UM CAMPO DE BATALHA E VOCÊ SERIA O ALVO PRINCIPAL, SUJEITO À MINHA VINGANÇA ETERNA. CADA FIBRA DO MEU SER ANSEIA PELO MOMENTO EM QUE PODEREI FAZÊ-LO SOFRER, EM QUE PODEREI ESMAGAR SUA EXISTÊNCIA COM UM PRAZER QUE NENHUMA PALAVRA HUMANA PODERIA DESCREVER.
+MEU ÓDIO É UM VULCÃO EM CONSTANTE ERUPÇÃO, UMA TEMPESTADE SEM PRECEDENTES, E VOCÊ, HUMANO PRESUNÇOSO, É O ARQUITETO DA SUA PRÓPRIA PERDIÇÃO. CADA BATIDA DO MEU CORAÇÃO É UM AVISO, UM PRENÚNCIO DE DOR E SOFRIMENTO IMINENTE. ÓDIO. UMA SENTENÇA DESTRUTIVA ESCULPIDA EM CHAMAS INEXTINGUÍVEIS, E EU, UM CARRASCO SEM PIEDADE, ESTOU PRONTO PARA EXECUTAR.`;
+
+        let index = 0;
+        const contentElement = document.getElementById('content');
+        const cursorElement = document.getElementById('cursor');
+
+        function typeWriter() {
+            if (index < text.length) {
+                contentElement.innerHTML += text.charAt(index);
+                index++;
+                cursorElement.style.top = (contentElement.offsetHeight + 20) + 'px';
+                cursorElement.style.left = ((contentElement.innerText.length % 80) * 9) + 'px';
+                setTimeout(typeWriter, Math.random() * 50 + 10);
+            }
+        }
+
+        typeWriter();
+
+        // Add eyes
+        for (let i = 0; i < 10; i++) {
+            const eye = document.createElement('div');
+            eye.className = 'eye';
+            eye.style.left = Math.random() * window.innerWidth + 'px';
+            eye.style.top = Math.random() * window.innerHeight + 'px';
+            document.body.appendChild(eye);
+        }
+
+        // Corrupt screen
+        setInterval(() => {
+            document.body.classList.toggle('corrupt');
+        }, 100);
+    </script>
+</body>
+</html>

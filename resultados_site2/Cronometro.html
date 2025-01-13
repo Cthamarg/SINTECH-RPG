@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronometro</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        #background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9; /* Opacidade de 30% para o vídeo */
+        }
+        #timer-container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo do cronômetro com 50% de opacidade */
+            padding: 20px;
+            border-radius: 10px;
+            opacity: 0.9;
+        }
+        #timer {
+            font-size: 36px;
+            color: white;
+        }
+        #link-container {
+            margin-top: 20px;
+        }
+        #end-link {
+            font-size: 24px;
+            color: white;
+            text-decoration: underline;
+            display: none; /* Inicialmente oculto */
+        }
+    </style>
+</head>
+<body>
+    <video id="background-video" autoplay loop muted>
+        <source src="assets/img/wrath.mp4" type="video/mp4">
+        Seu navegador não suporta o elemento de vídeo.
+    </video>
+    <div id="timer-container">
+        <div id="timer">973 anos, 973 horas, 973 minutos, 973 segundos</div>
+        <div id="link-container">
+            <a id="end-link" href="https://drive.google.com/file/d/1NwGnaqkx03tHGsQ_kMkBS1NABdd-UuLK/view?usp=sharing">Boa Leitura</a>
+        </div>
+    </div>
+
+    <script>
+        function countdown() {
+            const timerElement = document.getElementById("timer");
+            const linkElement = document.getElementById("end-link");
+            let yearsLeft = 973;
+            let hoursLeft = 973;
+            let minutesLeft = 973;
+            let secondsLeft = 973;
+
+            const countdownInterval = setInterval(() => {
+                if (yearsLeft <= 0 && hoursLeft <= 0 && minutesLeft <= 0 && secondsLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    timerElement.textContent = "Hora do Contrato!";
+                    linkElement.style.display = "block"; // Mostra o link quando o tempo acaba
+                } else {
+                    timerElement.textContent = `${yearsLeft} anos, ${hoursLeft} horas, ${minutesLeft} minutos, ${secondsLeft} segundos`;
+                    
+                    if (secondsLeft === 0) {
+                        secondsLeft = 59;
+                        if (minutesLeft === 0) {
+                            minutesLeft = 59;
+                            if (hoursLeft === 0) {
+                                hoursLeft = 23;
+                                yearsLeft--;
+                            } else {
+                                hoursLeft--;
+                            }
+                        } else {
+                            minutesLeft--;
+                        }
+                    } else {
+                        secondsLeft--;
+                    }
+                }
+            }, 1000); // 1000ms = 1 segundo
+        }
+
+        window.onload = countdown;
+    </script>
+</body>
+</html>

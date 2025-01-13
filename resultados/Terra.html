@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento Confidencial: Origem - Terra</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #00ff00;
+            font-family: Fixedsys, monospace;
+            font-size: 16px;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        .section-title {
+            color: #00ff00;
+            margin-bottom: 10px;
+            border: 2px solid #00ff00; /* Adicionando borda */
+            padding: 10px; /* Adicionando espaço interno */
+        }
+        .section-content {
+            margin-left: 20px;
+        }
+        .blink {
+            animation: blink-animation 1s step-end infinite;
+        }
+        @keyframes blink-animation {
+            0% { opacity: 1.0; }
+            50% { opacity: 0.0; }
+            100% { opacity: 1.0; }
+        }
+        #back-button {
+            background-color: #333;
+            color: #00ff00;
+            border: 2px solid #00ff00; /* Adicionando borda */
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s; /* Adicionando transição de cor */
+        }
+        #back-button:hover {
+            background-color: #555;
+            border-color: #55ff55; /* Mudando a cor da borda ao passar o mouse */
+        }
+        #back-button:focus {
+            outline: none; /* Removendo a borda ao focar */
+        }
+    </style>
+</head>
+<body>
+    <div class="section-title">DOCUMENTO CONFIDENCIAL: Origem - Terra</div>
+    <div class="section-content">
+        <p>Pouco se sabe sobre o motivo do abandono da Terra; esse segredo é guardado apenas entre os membros da família Blackwell.</p>
+        <p>Há mais de 970 anos, um gigantesco evento nuclear exterminou toda a vida no planeta, deixando apenas uma coisa para trás: o Projeto Viena.</p>
+    </div>
+    <div class="section-title">FINAL DO DOCUMENTO - CONFIDENCIAL</div>
+    <p class="blink">_</p>
+    <button id="back-button" onclick="window.location.href = 'index.html';">RETORNAR A BUSCA</button>
+</body>
+</html>

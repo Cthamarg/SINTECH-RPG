@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[A.S.T.R.A] - Relatórios de Contato Não Confirmados</title>
+  <style>
+    /* -------- RESET -------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* -------- CONFIGURAÇÕES GERAIS -------- */
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #000; /* Fundo preto */
+      color: #78F443;   /* Verde neon estilo Fallout */
+      font-family: 'Courier New', monospace;
+      overflow: hidden; /* Remove barras de rolagem */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* -------- CONTAINER PRINCIPAL -------- */
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      height: 90%;
+      padding: 20px;
+      background: radial-gradient(circle at center, rgba(120, 244, 67, 0.1), transparent 80%);
+      border: 2px solid #78F443;
+      box-shadow: 0 0 20px #78F443;
+      overflow-y: auto; /* Permite rolagem personalizada */
+      position: relative;
+    }
+
+    /* -------- SCROLLBAR PERSONALIZADO -------- */
+    .container::-webkit-scrollbar {
+      width: 8px;
+    }
+    .container::-webkit-scrollbar-track {
+      background: #003300;
+    }
+    .container::-webkit-scrollbar-thumb {
+      background: #78F443;
+      border-radius: 4px;
+    }
+    .container::-webkit-scrollbar-thumb:hover {
+      background: #98ff70;
+    }
+
+    /* -------- TÍTULO PRINCIPAL -------- */
+    .main-title {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px #78F443;
+      animation: glitch 1.5s infinite alternate;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 1px 1px 2px #78F443, -1px -1px 2px #00ff00; }
+      50% { text-shadow: -2px -2px 3px #78F443, 2px -1px 3px #00ff00; }
+      100% { text-shadow: 2px -2px 3px #78F443, -1px 2px 3px #00ff00; }
+    }
+
+    /* -------- SEÇÕES DE TEXTO -------- */
+    section {
+      margin-bottom: 20px;
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      border-bottom: 1px dashed #78F443;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      text-shadow: 0 0 4px #78F443;
+    }
+
+    section p {
+      line-height: 1.8;
+      margin-bottom: 10px;
+      text-align: justify;
+      text-shadow: 0 0 2px #78F443;
+    }
+
+    /* -------- MENSAGENS DE ALERTA -------- */
+    .alert {
+      padding: 10px;
+      border: 1px dashed #ff0000;
+      margin-bottom: 20px;
+      color: #ff0000;
+      text-shadow: 0 0 4px #ff0000;
+    }
+
+    /* -------- SEÇÕES CENSURADAS -------- */
+    .censored-section {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px dashed #78F443;
+      animation: corruptEffect 0.2s infinite;
+    }
+
+    @keyframes corruptEffect {
+      0%, 100% { transform: none; }
+      50% { transform: translateX(2px) translateY(-1px) skewX(-1deg); }
+    }
+
+    .censored-text {
+      background: repeating-linear-gradient(
+        90deg,
+        #000 0,
+        #000 10px,
+        #78F443 10px,
+        #78F443 20px
+      );
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      font-weight: bold;
+    }
+
+    /* -------- SCANLINES (EFEITO CRT) -------- */
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: linear-gradient(rgba(120,244,67,0.05) 50%, transparent 50%);
+      background-size: 100% 3px;
+      z-index: 9999;
+      animation: flicker 0.1s steps(1) infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.95; }
+    }
+
+    /* -------- RESPONSIVIDADE -------- */
+    @media (max-width: 768px) {
+      .main-title {
+        font-size: 1.6rem;
+      }
+
+      section h2 {
+        font-size: 1.2rem;
+      }
+
+      section p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Overlay de Scanlines -->
+  <div class="scanlines"></div>
+
+  <!-- Container Principal -->
+  <div class="container">
+    <h1 class="main-title">A.S.T.R.A - Relatórios de Contato Não Confirmados</h1>
+
+    <!-- Introdução -->
+    <section>
+      <h2>Descrição Geral</h2>
+      <p>Os **Unconfirmed Contact Reports (UCRs)** são relatos de encontros com entidades que escapam à categorização 
+      oficial da A.S.T.R.A. Esses eventos, fenômenos ou formas de vida não seguem qualquer padrão reconhecido em 
+      nossos bancos de dados. Em razão de suas características únicas, permanecem como anomalias não resolvidas.</p>
+    </section>
+
+    <!-- Evento 1 -->
+    <section>
+      <h2>Caso 1: A Sombra do Distrito 7</h2>
+      <p><strong>Descrição:</strong> Figura alta e encapuzada observada no Setor 7-B. Sistemas de monitoramento 
+      registraram apenas interferências e vibes sonoras semelhantes à estática.</p>
+      <p><strong>Status:</strong> Monitoramento ativo. Nenhuma evidência concreta até o momento.</p>
+    </section>
+
+    <!-- Censurado -->
+    <div class="censored-section">
+      <p class="censored-text">*** DADOS RESTRITOS - ACESSO NEGADO ***</p>
+    </div>
+
+    <!-- Evento 2 -->
+    <section>
+      <h2>Caso 2: A Voz Sem Frequência</h2>
+      <p><strong>Descrição:</strong> Técnicos no Subnível 5 relataram ouvir vozes sussurrantes durante a manutenção. 
+      Essas vozes eram detectadas de forma isolada, nunca por mais de uma pessoa ao mesmo tempo.</p>
+      <p><strong>Status:</strong> Área isolada. Investigações futuras planejadas.</p>
+    </section>
+
+    <!-- Mensagem de Alerta da A.S.T.R.A -->
+    <div class="alert">
+      ALERTA: ESTES RELATÓRIOS NÃO POSSUEM VALIDAÇÃO OFICIAL. PROSEGUIR COM CAUTELA.
+    </div>
+  </div>
+</body>
+</html>

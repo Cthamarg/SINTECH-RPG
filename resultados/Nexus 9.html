@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documento Secreto - NEXUS-9</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+    :root {
+        --primary-color: #00ff00;
+        --secondary-color: #003300;
+        --background-color: #000000;
+        --text-color: #ccffcc;
+    }
+
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        font-family: 'Share Tech Mono', monospace;
+        overflow: hidden;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        padding: 20px;
+        box-sizing: border-box;
+        background: 
+            linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%),
+            url('') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .logo {
+        font-size: 1.5em;
+        color: var(--primary-color);
+        text-shadow: 0 0 10px var(--primary-color);
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { text-shadow: 0 0 10px var(--primary-color); }
+        50% { text-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--primary-color); }
+        100% { text-shadow: 0 0 10px var(--primary-color); }
+    }
+
+    .content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border: 1px solid var(--primary-color);
+        box-shadow: 0 0 20px var(--primary-color);
+    }
+
+    .content::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .content::-webkit-scrollbar-track {
+        background: var(--secondary-color);
+    }
+
+    .content::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+    }
+
+    h1, h2 {
+        color: var(--primary-color);
+        margin-bottom: 15px;
+    }
+
+    p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+    }
+
+    .highlight {
+        color: var(--primary-color);
+        font-weight: bold;
+    }
+
+    .footer {
+        text-align: center;
+        padding: 10px;
+        color: var(--secondary-color);
+        font-size: 0.8em;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+        .content {
+            padding: 10px;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <pre class="logo">
+██████╗░░█████╗░███╗░░░███╗███████╗██████╗░██╗░░░██╗██╗███████╗██████╗░
+██╔══██╗██╔══██╗████╗░████║██╔════╝██╔══██╗██║░░░██║██║██╔════╝██╔══██╗
+██║░░██║██║░░██║██╔████╔██║█████╗░░██████╔╝██║░░░██║██║█████╗░░██████╔╝
+██║░░██║██║░░██║██║╚██╔╝██║██╔══╝░░██╔══██╗██║░░░██║██║██╔══╝░░██╔══██╗
+██████╔╝╚█████╔╝██║░╚═╝░██║███████╗██║░░██║╚██████╔╝██║███████╗██║░░██║
+╚═════╝░░╚════╝░╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚═╝░╚═════╝░╚═╝╚══════╝╚═╝░░╚═╝
+        </pre>
+    </div>
+    <div class="content">
+        <h1>NEXUS-9: Relatório de Campo</h1>
+        <p><span class="highlight">Classificação:</span> Confidencial</p>
+        <p><span class="highlight">Autor:</span> Comandante da Operação NEXUS-9</p>
+        <p><span class="highlight">Data:</span> [21/07/2723]</p>
+
+        <h2>Objetivo da Operação:</h2>
+        <p>A Operação NEXUS-9, conduzida pelo grupo NEXUS, visa estabelecer e manter uma instalação penitenciária espacial de alta segurança para o estudo do comportamento humano e a realização de experimentos em ambiente terrestre. A principal função da NEXUS é enviar indivíduos selecionados da prisão espacial para a Terra, a fim de observar suas interações e reações ao ambiente terrestre.</p>
+
+        <h2>Detalhes da Instalação:</h2>
+        <p>A NEXUS é uma estrutura modular altamente segura, localizada em órbita geoestacionária em torno da Terra. Seu design incorpora tecnologia de ponta fornecida pela NEXUS para garantir a contenção eficaz dos prisioneiros e a realização segura dos experimentos. A instalação é equipada com sistemas de monitoramento avançados, dispositivos de contenção e uma variedade de laboratórios para análise de dados.</p>
+
+        <h2>Procedimento de Teste:</h2>
+        <p>Os prisioneiros selecionados para participar dos experimentos da NEXUS são submetidos a um rigoroso processo de avaliação física e psicológica. Aqueles considerados adequados são transportados para a Terra por meio de cápsulas de reentrada, onde são monitorados de perto por equipes de observadores e pesquisadores.</p>
+        <p>Durante sua estadia na Terra, as cobaias da NEXUS são monitoradas 24 horas por dia por meio de dispositivos de rastreamento e comunicação. Suas interações com o ambiente terrestre são registradas e analisadas para avaliar seu comportamento em condições naturais.</p>
+
+        <h2>Resultados Preliminares:</h2>
+        <p>Os primeiros testes realizados como parte da Operação NEXUS-9 revelaram insights significativos sobre a adaptação dos indivíduos ao ambiente terrestre. Observamos uma ampla gama de respostas emocionais e comportamentais, desde a adaptação tranquila até a resistência agressiva.</p>
+        <p>Além disso, os dados coletados forneceram informações valiosas sobre a eficácia dos protocolos de contenção da NEXUS e a viabilidade de enviar prisioneiros da instalação para a Terra. No entanto, mais análises são necessárias para entender completamente os efeitos a longo prazo desses experimentos.</p>
+
+        <h2>Conclusão:</h2>
+        <p>A Operação NEXUS-9 representa um passo significativo no avanço da pesquisa científica e da segurança penitenciária. A NEXUS está comprometida em continuar explorando os limites do conhecimento humano por meio de experimentos controlados e éticos na NEXUS. Esta instalação continua sendo uma ferramenta vital para a compreensão do comportamento humano e a busca pela excelência na segurança e no controle de prisioneiros.</p>
+    </div>
+    <div class="footer">
+        NEXUS-9 © 2723 | Todos os direitos reservados
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CONSELHO DA URNA VAZIA</title>
+  <!-- Fonte estilo retrô/terminal -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* HTML e BODY ocupam 100% de altura */
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* sem scroll do body */
+      font-family: 'VT323', monospace;
+      background: #000; /* fallback */
+      color: #cc0000;
+      position: relative;
+    }
+
+    /* Canvas “Matrix” atrás do terminal */
+    #matrix-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* FICA ATRÁS */
+      pointer-events: none; /* não bloqueia cliques */
+    }
+
+    /* Scanlines (opcional) acima do canvas, mas abaixo do terminal */
+    .scanlines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2; /* ainda “atrás” do terminal */
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 0, 0, 0.02) 0px,
+        rgba(0, 0, 0, 0.15) 2px,
+        transparent 4px
+      );
+      animation: scrollScanlines 8s linear infinite;
+    }
+    @keyframes scrollScanlines {
+      0%   { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+
+    /* Terminal fullscreen acima (z-index: 3) */
+    #terminal {
+      position: absolute;
+      top: 0; 
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* FONDO COM GRADIENTE SEMI-TRANSPARENTE */
+      background: radial-gradient(circle, rgba(37,0,0,0.7) 20%, rgba(6,0,0,0.7) 90%);
+      z-index: 3; /* ACIMA do canvas */
+      overflow-y: auto; 
+      scroll-behavior: smooth;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: glitch-border 2.5s infinite; 
+    }
+
+    /* Barra de rolagem estilizada (WebKit) */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1a0000;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cc0000;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff4d4d;
+    }
+
+    /* Efeito glitch sutil */
+    @keyframes glitch-border {
+      0%, 70% { box-shadow: 0 0 25px #cc0000; }
+      30% {
+        box-shadow: 0 0 10px #cc0000, 0 0 10px #900 inset;
+      }
+      50% { box-shadow: 0 0 25px #ff0000; }
+    }
+
+    /* Container interno mais translúcido */
+    .terminal-content {
+      /* Ajustamos para .65, por exemplo, para ver melhor a chuva atrás */
+      background-color: rgba(20, 0, 0, 0.65);
+      box-shadow: 0 0 30px #cc0000;
+      width: 90%;
+      max-width: 1000px;
+      padding: 30px;
+      animation: flickerAnim 6s infinite; 
+      text-align: left;
+      margin: 40px 0;
+    }
+
+    @keyframes flickerAnim {
+      0%, 6%, 18%, 70%, 100% { opacity: 1; }
+      3%, 10%, 50%, 90% { opacity: 0.85; }
+    }
+
+    /* Exemplo de títulos, etc. */
+    h1 {
+      font-size: 1.8em;
+      text-shadow: 0 0 6px #ff1a1a;
+      margin-bottom: 15px;
+      color: #ff3b3b;
+      text-align: center;
+    }
+    h2 {
+      font-size: 1.4em;
+      margin: 20px 0 10px 0;
+      color: #ff4d4d;
+      text-shadow: 0 0 4px #cc0000;
+    }
+    p {
+      margin-bottom: 12px;
+      line-height: 1.5em;
+    }
+    ul {
+      margin-left: 30px;
+      margin-bottom: 20px;
+    }
+    ul li {
+      padding: 5px 0;
+    }
+
+    /* PROMPT ou rodapé */
+    #prompt {
+      color: #ff1a1a;
+      margin-top: 20px;
+      text-align: center;
+      text-shadow: 0 0 6px #cc0000;
+      animation: promptShake 3s infinite;
+    }
+    @keyframes promptShake {
+      0%, 100% { transform: translateX(0); }
+      10%  { transform: translateX(-1px); }
+      20%  { transform: translateX(2px); }
+      30%  { transform: translateX(-2px); }
+      40%  { transform: translateX(2px); }
+      50%  { transform: translateX(-2px); }
+      60%  { transform: translateX(1px); }
+      70%  { transform: translateX(-1px); }
+      80%  { transform: translateX(2px); }
+      90%  { transform: translateX(-2px); }
+    }
+
+    /* Responsividade */
+    @media (max-width: 400px) {
+      .terminal-content {
+        padding: 20px;
+        font-size: 0.9em;
+        margin: 20px 0;
+      }
+      h1 { font-size: 1.3em; }
+      h2 { font-size: 1.1em; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Canvas (MATRIX) atrás de tudo -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <!-- Scanlines (opcional) -->
+  <div class="scanlines"></div>
+
+  <!-- Terminal com fundo semitransparente -->
+  <div id="terminal">
+    <div class="terminal-content">
+      <h1>CONSELHO DA URNA VAZIA</h1>
+      <p><strong>Facção:</strong> Humanos marginalizados e decadentes</p>
+      <p><strong>Líder:</strong> Juamish “Mão Vaga”, ex-militar que perdeu a fé em qualquer autoridade</p>
+
+      <h2>Motivação Principal</h2>
+      <p>Sobreviver a todo custo e, se possível, tomar controle da nave para reaver privilégios perdidos.</p>
+
+      <h2>Descrição</h2>
+      <p>
+        O Conselho da Urna Vazia é formado por humanos abandonados no nível -5, lidando
+        com fome, doenças e escassez de esperança. Uniram-se sob Juamish “Mão Vaga”,
+        um antigo oficial que viu sua unidade ser traída. Agora exploram tecnologias
+        sucateadas, contrabandeiam peças roubadas dos androides e promovem emboscadas
+        contra inimigos.
+      </p>
+
+      <h2>Crenças e Valores</h2>
+      <ul>
+        <li>Sobrevivência no caos</li>
+        <li>Ódio institucional</li>
+        <li>Desespero unificador</li>
+      </ul>
+
+      <h2>Atividades Conhecidas</h2>
+      <ul>
+        <li>Saques em instalações e colônias de androides ou grupos rivais</li>
+        <li>Alianças temporárias com contrabandistas ou rebeldes</li>
+        <li>Mercado negro de órgãos, peças cibernéticas e até escravos</li>
+      </ul>
+
+      <p>
+        Alguns rumores apontam que Juamish mutilou a própria mão em protesto às
+        altas patentes, substituindo-a por um artefato rudimentar. A fome crônica
+        e o ressentimento contra forasteiros levaram a boatos de canibalismo nos
+        corredores esquecidos.
+      </p>
+
+      <div id="prompt">[A.S.T.R.A.//Terminal] - Catálogo encerrado.</div>
+    </div>
+  </div>
+
+  <!-- SCRIPT “Matrix” -->
+  <script>
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const characters = '0123456789ABCDEF';
+    let drops = [];
+    let fontSize = 16;
+    let columns = 0;
+
+    function initDrops() {
+      columns = Math.floor(canvas.width / fontSize);
+      drops = [];
+      for (let i = 0; i < columns; i++) {
+        drops[i] = (Math.random() * canvas.height);
+      }
+    }
+    window.addEventListener('resize', initDrops);
+    initDrops();
+
+    function drawMatrix() {
+      // Fundo semi-translúcido para efeito de rastro
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Cor dos caracteres
+      ctx.fillStyle = 'rgba(204, 0, 0, 0.7)';
+      ctx.font = fontSize + 'px VT323';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+        ctx.fillText(text, i * fontSize, drops[i]);
+        drops[i] += fontSize;
+        if (drops[i] > canvas.height) {
+          drops[i] = (Math.random() * canvas.height) / 4;
+        }
+      }
+      requestAnimationFrame(drawMatrix);
+    }
+    requestAnimationFrame(drawMatrix);
+  </script>
+</body>
+</html>

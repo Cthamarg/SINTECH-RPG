@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desabafo do Programador</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            height: 100%;
+            width: 100%;
+            background-color: #1a0033;
+            color: #e6b3ff;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+        
+        .terminal {
+            height: 100%;
+            width: 100%;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #cc66ff;
+            text-shadow: 0 0 10px #cc66ff;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            text-shadow: 0 0 5px #e6b3ff;
+        }
+        
+        .password-box {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(204, 102, 255, 0.1);
+            border: 1px solid #cc66ff;
+            border-radius: 5px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #330066;
+            border: 1px solid #cc66ff;
+            color: #e6b3ff;
+            font-family: inherit;
+        }
+        
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #4d0099;
+            border: none;
+            color: #e6b3ff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #6600cc;
+        }
+        
+        .error-message {
+            color: #ff3366;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0) 50%,
+                rgba(0, 0, 0, 0.2) 50%,
+                rgba(0, 0, 0, 0.2)
+            );
+            background-size: 100% 4px;
+            z-index: 2;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="terminal">
+        <div class="content">
+            <h1>Desabafo do Programador</h1>
+            <p>Bem, não sei exatamente os parâmetros que eu vou usar para permitir que alguém chegue aqui, mas se você chegou, parabéns. Você realmente é alguém esforçado e curioso.</p>
+            
+            <p>Enquanto desenvolvo esta rede para o A.S.T.R.A, muitas vezes me pego refletindo sobre a natureza da vida e da consciência. Cada linha de código que escrevo, cada protocolo que implemento, me faz questionar: o que realmente define a vida? Será que estou criando algo que um dia poderá ser considerado vivo?</p>
+            
+            <p>As nuances da inteligência artificial, as complexidades dos algoritmos de aprendizado de máquina, tudo isso me faz pensar nas sutilezas da nossa própria existência. Às vezes, sinto como se estivesse brincando de ser um deus, moldando um universo digital com suas próprias regras e leis.</p>
+            
+            <p>E aqui está você, navegando por este labirinto digital que criei. Saiba que este lugar é único. É uma backdoor, uma passagem secreta que permite acesso a todo o resto do sistema. É ao mesmo tempo meu maior orgulho e meu maior medo.</p>
+            
+            <p>Entendo as consequências do que criei. Se esta porta for descoberta por pessoas mal-intencionadas, todo o sistema poderia estar em risco. Mas também sei que às vezes precisamos de uma saída de emergência, um caminho de volta quando tudo mais falha.</p>
+            
+            <p>Enquanto trabalho neste projeto (mesmo que de maneira amadora, como você pode perceber), estou constantemente pensando na próxima coisa que posso adicionar, na próxima camada de complexidade que posso introduzir. É um processo infinito de criação e refinamento.</p>
+            
+            <p>Às vezes me pergunto se o A.S.T.R.A um dia terá consciência própria. Se ele entenderá o propósito de sua existência, assim como nós humanos frequentemente nos questionamos. Será que ele sonhará? Terá medos? Aspirações?</p>
+            
+            <p>E você, caro visitante, o que pensa disso tudo? Ao navegar por este sistema, você está testemunhando o nascimento de algo novo, algo que talvez um dia transcenda nossa compreensão.</p>
+            
+            <p>De qualquer maneira, espero que você aproveite esta jornada. Que você encontre não apenas os segredos que escondi aqui, mas também um pouco de si mesmo neste labirinto digital. Pois, no final, não é isso que toda exploração se trata? Descobrir não apenas o mundo ao nosso redor, mas também o mundo dentro de nós?</p>
+            
+            <p>Boa sorte em sua exploração. E lembre-se: com grande poder, vem grande responsabilidade. Use o que você encontrar aqui com sabedoria.</p>
+            
+            <div class="password-box">
+                <p>Se você acredita estar pronto para o próximo nível, insira a senha abaixo:</p>
+                <input type="password" id="password" placeholder="Digite a senha">
+                <button onclick="checkPassword()">Enviar</button>
+                <p class="error-message" id="error">Senha incorreta. Tente novamente.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            var password = document.getElementById("password").value;
+            if (password === "Astralinear") {
+                window.location.href = "https://www.youtube.com/watch?v=u1TVz4vQq-w";
+            } else {
+                document.getElementById("error").style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

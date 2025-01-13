@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anomalia Brayfog - Arquivo Não Catalogado</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        :root {
+            --primary-color: #cc0000;
+            --secondary-color: #ff4d4d;
+            --background-color: #000000;
+            --text-color: #ff4d4d;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'VT323', monospace;
+            font-size: 18px;
+            overflow: hidden;
+        }
+
+        /* Fundo estilo Matrix */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Scanlines */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(204, 0, 0, 0.02) 0px,
+                rgba(0, 0, 0, 0.15) 2px,
+                transparent 4px
+            );
+            animation: scanlines-animation 8s linear infinite;
+        }
+
+        @keyframes scanlines-animation {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            background: rgba(37, 0, 0, 0.85); /* Fundo translúcido */
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 30px var(--primary-color);
+            z-index: 3;
+        }
+
+        .title {
+            color: var(--secondary-color);
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px var(--primary-color), -2px -2px #800000;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 5px;
+            text-shadow: 1px 1px var(--secondary-color);
+        }
+
+        .section-content {
+            margin-left: 20px;
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li::before {
+            content: ">";
+            color: var(--secondary-color);
+            margin-right: 10px;
+        }
+
+        #back-button {
+            background-color: var(--secondary-color);
+            color: var(--background-color);
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-family: 'VT323', monospace;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        #back-button:hover {
+            background-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .blink {
+            animation: blink-animation 1s step-end infinite;
+            color: var(--secondary-color);
+        }
+
+        @keyframes blink-animation {
+            50% { opacity: 0; }
+        }
+
+        /* Customização do scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a0000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .title {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.2em;
+            }
+
+            #back-button {
+                font-size: 0.9em;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fundo estilo Matrix -->
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Scanlines -->
+    <div class="scanlines"></div>
+
+    <!-- Conteúdo principal -->
+    <div class="container">
+        <h1 class="title">ANOMALIA BRAYFOG</h1>
+        <div class="section-title">ARQUIVO NÃO CATALOGADO - MÁXIMO SIGILO</div>
+        <div class="section-content">
+            <ul>
+                <li>Anomalia: Brayfog</li>
+                <li>Tipo: Desconhecido</li>
+                <li>Origem: Desconhecida</li>
+                <li>Localização Atual: Desconhecida</li>
+            </ul>
+        </div>
+        <div class="section-title">RELATÓRIO DE INVESTIGAÇÃO:</div>
+        <div class="section-content">
+            <p>A anomalia Brayfog é um fenômeno cósmico de natureza desconhecida. Sua existência foi descoberta em [DATA REDATADA] por uma equipe de cientistas dedicados à exploração do espaço profundo.</p>
+            <p>Desde sua descoberta, a anomalia Brayfog tem sido objeto de intenso escrutínio e investigação. No entanto, os esforços para compreender sua natureza e origem foram amplamente infrutíferos.</p>
+            <p>As características da anomalia Brayfog desafiam a compreensão convencional da física e da astronomia. Sua imprevisibilidade e comportamento errático sugerem uma influência além das leis conhecidas da natureza.</p>
+            <p>Os cientistas continuam a monitorar os sinais e padrões associados à anomalia Brayfog, na esperança de encontrar pistas que possam revelar sua verdadeira natureza. No entanto, até o momento, os resultados têm sido inconclusivos.</p>
+            <p>A última localização conhecida da anomalia Brayfog permanece um mistério, assim como sua origem e propósito. Enquanto os esforços de pesquisa continuam, a anomalia Brayfog continua a desafiar a compreensão humana e a inspirar a busca pelo desconhecido.</p>
+        </div>
+        <div class="section-title">FINAL DO DOCUMENTO - CONFIDENCIAL</div>
+        <p class="blink">_</p>
+    </div>
+
+    <!-- Script do fundo Matrix -->
+    <script>
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const characters = 'DHAUSDHU3H4UHU123ASDOSADFAFD23401027312H3I1GEG';
+        const fontSize = 16;
+        const drops = Array(Math.floor(canvas.width / fontSize)).fill(0);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = 'rgba(204, 0, 0, 0.7)';
+            ctx.font = fontSize + 'px VT323';
+
+            drops.forEach((y, index) => {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                const x = index * fontSize;
+                ctx.fillText(text, x, y);
+
+                drops[index] = y > canvas.height ? 0 : y + fontSize;
+            });
+
+            requestAnimationFrame(drawMatrix);
+        }
+        drawMatrix();
+    </script>
+</body>
+</html>

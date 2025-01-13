@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANDARES RESTRITOS - ACESSO NEGADO</title>
+  <style>
+    /* BASE - Tela Total e Adaptação */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      background: black;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Título Glitchado */
+    .title {
+      font-size: 3rem;
+      color: #ff0000;
+      text-shadow: 0 0 20px #ff0000;
+      animation: glitch 1.5s infinite;
+      z-index: 10;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 1px 1px 3px #ff0000, -1px -1px 2px #ff5555; }
+      25% { text-shadow: -3px 3px 2px #ff5555, 3px -3px 2px #ff0000; }
+      50% { text-shadow: 1px -1px 2px #ff0000, -1px 1px 2px #ff5555; }
+      75% { text-shadow: -2px 2px 2px #ff5555, 2px -2px 2px #ff0000; }
+      100% { text-shadow: 2px 0px 2px #ff0000, 0px 2px 2px #ff5555; }
+    }
+
+    /* Mensagens */
+    .message {
+      font-size: 1.5rem;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      z-index: 10;
+      margin-top: 10px;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Barra de Exclusão */
+    .deletion-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 6px;
+      background-color: #ff0000;
+      animation: deletion 7s linear forwards;
+      z-index: 5;
+    }
+
+    @keyframes deletion {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    /* Efeito de Corrupção */
+    .corrupt-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        90deg,
+        #000 0px,
+        #000 2px,
+        #00ff00 4px,
+        #000 6px
+      );
+      opacity: 0.1;
+      animation: corrupt 0.1s infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes corrupt {
+      0%, 100% { transform: none; }
+      50% { transform: translate(2px, 2px); }
+    }
+
+    /* Fundo Dinâmico */
+    body {
+      animation: glitch-background 0.15s infinite;
+    }
+
+    @keyframes glitch-background {
+      0% { background-color: black; }
+      50% { background-color: #020202; }
+      100% { background-color: black; }
+    }
+
+    /* Olhos Piscantes */
+    .eye {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: url('') no-repeat center center;
+      background-size: cover;
+      animation: blink-eye 6s infinite ease-in-out;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    @keyframes blink-eye {
+      0%, 90% { opacity: 1; }
+      95% { opacity: 0; }
+    }
+
+    /* Mensagem Final */
+    .final-error {
+      font-size: 2rem;
+      color: #ff0000;
+      margin-top: 20px;
+      animation: glitch 1.5s infinite;
+    }
+
+    /* Restrições para Dispositivos Menores */
+    @media (max-width: 768px) {
+      .title {
+        font-size: 2rem;
+      }
+
+      .eye {
+        width: 50px;
+        height: 50px;
+      }
+
+      .message {
+        font-size: 1.2rem;
+      }
+
+      .final-error {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">ANDARES RESTRITOS - PROTOCOLO VIOLADO</div>
+    <div class="message" style="animation-delay: 1s;">
+      A.S.T.R.A detectou atividade não autorizada.
+    </div>
+    <div class="message" style="animation-delay: 3s;">
+      Rastreamento do usuário iniciado...
+    </div>
+    <div class="message" style="animation-delay: 5s;">
+      Informações estão sendo coletadas. Você será reportado.
+    </div>
+    <div class="final-error">
+      "VOCÊ NÃO DEVIA TER VINDO AQUI."
+    </div>
+    <div class="deletion-bar"></div>
+    <div class="corrupt-overlay"></div>
+  </div>
+
+  <!-- Efeito de olhos piscantes -->
+  <script>
+    // Criar olhos que piscam aleatoriamente pela tela
+    function createEyes() {
+      for (let i = 0; i < 20; i++) {
+        const eye = document.createElement('div');
+        eye.className = 'eye';
+        eye.style.left = Math.random() * window.innerWidth + 'px';
+        eye.style.top = Math.random() * window.innerHeight + 'px';
+        document.body.appendChild(eye);
+      }
+    }
+    createEyes();
+
+    // Após apagar tudo, exibir uma mensagem assustadora
+    setTimeout(() => {
+      document.body.innerHTML = `
+        <div style="color: #ff0000; text-align: center; font-size: 2.5rem; animation: glitch 1s infinite;">
+          TODOS OS REGISTROS FORAM APAGADOS.<br>
+          <span style="font-size: 1.5rem;">O A.S.T.R.A ESTÁ TE OBSERVANDO.</span>
+        </div>`;
+    }, 7000);
+  </script>
+</body>
+</html>
