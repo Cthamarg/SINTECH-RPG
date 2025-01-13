@@ -14,5 +14,21 @@
       {
         "name": "REDE ALICIA.html",
         "aliases": ["REDE A.L.I.C.IA", "REDE ALICIA"]
+      },
+      {
+        "name": "NCM.html",
+        "aliases": ["NCM"]
+      },
+      {
+        "name": "NCM2.html",
+        "aliases": ["NCM2", "NCM 2"]
+      },
+      {
+        "name": "Convite.html",
+        "aliases": ["Convite"]
+      },
+      {
+        "name": "REDE ALICIA.html",
+        "aliases": ["REDE A.L.I.C.IA", "REDE ALICIA"]
       }
   ]
